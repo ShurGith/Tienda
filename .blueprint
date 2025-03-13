@@ -1,0 +1,38 @@
+created:
+    - app/Http/Controllers/ProductController.php
+    - database/factories/ProductFactory.php
+    - database/factories/FeaturesproductFactory.php
+    - database/factories/GeneraloptionsFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/TagFactory.php
+    - database/factories/OrderFactory.php
+    - database/migrations/2025_03_13_202745_create_products_table.php
+    - database/migrations/2025_03_13_202746_create_featuresproducts_table.php
+    - database/migrations/2025_03_13_202747_create_generaloptions_table.php
+    - database/migrations/2025_03_13_202748_create_categories_table.php
+    - database/migrations/2025_03_13_202749_create_tags_table.php
+    - database/migrations/2025_03_13_202750_create_orders_table.php
+    - database/migrations/2025_03_13_202751_create_product_tag_table.php
+    - app/Models/Product.php
+    - app/Models/Featuresproduct.php
+    - app/Models/Generaloptions.php
+    - app/Models/Category.php
+    - app/Models/Tag.php
+    - app/Models/Order.php
+    - tests/Feature/Http/Controllers/ProductControllerTest.php
+    - app/Http/Requests/ProductStoreRequest.php
+    - app/Http/Requests/ProductUpdateRequest.php
+    - resources/views/product/index.blade.php
+    - resources/views/product/create.blade.php
+    - resources/views/product/show.blade.php
+    - resources/views/product/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    User: { name: string, email: string, avatar: 'string nullable', email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable' }
+    Product: { name: 'string index', description: 'longtext nullable', images: 'json nullable', features: 'longtext nullable', price: 'integer nullable', active: 'boolean default:1', oferta: 'boolean default:0', descuento: 'integer nullable', units: 'integer nullable', stars: 'integer nullable', relationships: { hasMany: Featuresproduct, belongsToMany: Tag, belongsTo: 'User, Category' } }
+    Featuresproduct: { title: 'string index', text: longtext, timestamps: false, relationships: { belongsTo: Product } }
+    Generaloptions: { name: 'string index', value: string, timestamps: false }
+    Category: { name: 'string index', bgcolor: 'text nullable', color: 'string nullable', image: 'text nullable', icon: 'text nullable', icon_active: 'boolean default:0', timestamps: false, relationships: { hasMany: Tag } }
+    Tag: { name: 'string index', bgcolor: 'text nullable', color: 'string nullable', image: 'text nullable', icon: 'text nullable', icon_active: 'boolean default:0', timestamps: false, relationships: { hasMany: Product, belongsTo: Category } }
+    Order: { buyer_id: 'id foreign:users', seller_id: 'id foreign:users', product_id: 'id foreign:products', relationships: { hasMany: Product } }

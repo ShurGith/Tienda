@@ -1,0 +1,63 @@
+models:
+  Product:
+    name: string index
+    description: longtext nullable
+    images: json nullable
+    features: longtext nullable
+    price: integer nullable
+    active: boolean default:1
+    oferta: boolean default:0
+    descuento: integer nullable
+    units: integer nullable
+    stars: integer nullable
+    relationships:
+      hasMany: Featuresproduct
+      belongsToMany: Tag
+      belongsTo: User, Category
+
+  Featuresproduct:
+    title: string index
+    text: longtext
+    timestamps: false
+    relationships:
+      belongsTo: Product
+
+  Generaloptions:
+    name: string index
+    value: string
+    timestamps: false
+
+  Category:
+    name: string index
+    bgcolor: text nullable
+    color: string nullable
+    image: text nullable
+    icon: text nullable
+    icon_active: boolean default:0
+    timestamps: false
+    relationships:
+      hasMany: Tag
+
+  Tag:
+    name: string index
+    bgcolor: text nullable
+    color: string nullable
+    image: text nullable
+    icon: text nullable
+    icon_active: boolean default:0
+    timestamps: false
+    relationships:
+      hasMany: Product
+      belongsTo: Category
+
+  Order:
+    buyer_id: id foreign:users
+    seller_id: id foreign:users
+    product_id: id foreign:products
+    relationships:
+      hasMany: Product
+
+
+controllers:
+  Product:
+    resource
