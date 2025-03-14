@@ -100,13 +100,12 @@
           position: absolute;
           top: 50%;
           left: 50%;
-          height: 102%;
-          width: 102%;
-          background-image: conic-gradient(from var(--angle), transparent 70%, #ff4545, #00ff99, #0066ff, #ff0095, #ff4545);
+          height: 103%;
+          width: 103%;
+          background-image: conic-gradient(from var(--angle), transparent 85%, #ff4545, #00ff99, #0066ff, #ff0095, #ff4545);
           background-size: 100%;
           translate: -50% -50%;
           border-radius: 10px;
-          padding: 3px;
           animation: 3s girar linear infinite;
           z-index: 0;
       }
