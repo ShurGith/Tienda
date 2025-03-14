@@ -13,11 +13,6 @@
     {
         use HasFactory;
         
-        /**
-         * The attributes that are mass assignable.
-         *
-         * @var array
-         */
         protected $fillable = [
           'name',
           'description',
@@ -77,7 +72,6 @@
                 }
             }
             return $thumbs;
-            
         }
         
         public function featuretitles(): HasMany
@@ -88,7 +82,7 @@
         
         public function featuresproducts(): HasMany
         {
-            return $this->hasMany(Featuresproduct::class);
+            return $this->hasMany(Featuretitle::class);
         }
         
         public function tags(): BelongsToMany

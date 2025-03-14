@@ -15,7 +15,7 @@ models:
       belongsToMany: Tag
       belongsTo: User, Category
 
-  Featuresproduct:
+  Featuretitle:
     title: string index
     text: longtext
     timestamps: false

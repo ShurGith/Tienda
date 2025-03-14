@@ -2,7 +2,7 @@
     
     namespace Database\Factories;
     
-    use App\Models\Featuresproduct;
+    use App\Models\Featuretitle;
     use Illuminate\Database\Eloquent\Factories\Factory;
     
     class FeaturesproductFactory extends Factory
@@ -12,7 +12,7 @@
          *
          * @var string
          */
-        protected $model = Featuresproduct::class;
+        protected $model = Featuretitle::class;
         
         /**
          * Define the model's default state.

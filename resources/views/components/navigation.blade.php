@@ -216,9 +216,9 @@
        class="fixed w-full flex top-20 justify-end items-end overflow-x-hidden ">
     <div class=" flex justify-center translate-x-full transition-all duration-500">
       @include('components.layouts.flash-messages')
-      @if(strpos($_SERVER['REQUEST_URI'], '/products/') !== false)
-        <x-layouts.flash-unic :message="$message"/>
-      @endif
+      {{--      @if(strpos($_SERVER['REQUEST_URI'], '/products/') !== false)--}}
+      <x-layouts.flash-unic :message="$message"/>
+      {{--      @endif--}}
     </div>
   </div>
 </nav>

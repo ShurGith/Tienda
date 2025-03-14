@@ -1,5 +1,4 @@
-<x-layouts.app>
-  zdsf
+<x-layouts.page>
   <style>
       :root {
           --clr-dark: #0f172a;
@@ -78,11 +77,76 @@
           background-color: red;
           color: white;
       }
+
+      @property --angle {
+          syntax: '<angle>';
+          inherits: false;
+          initial-value: 0deg;
+      }
+
+      .cardIluminada h1 {
+          font-family: "Playwrite NL";
+          font-weight: 400;
+          font-style: normal;
+          padding-bottom: 30px;
+      }
+
+      h3 {
+
+      }
+
+      .cardIluminada::before, cardIluminada::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          height: 102%;
+          width: 102%;
+          background-image: conic-gradient(from var(--angle), transparent 70%, #ff4545, #00ff99, #0066ff, #ff0095, #ff4545);
+          background-size: 100%;
+          translate: -50% -50%;
+          border-radius: 10px;
+          padding: 3px;
+          animation: 3s girar linear infinite;
+          z-index: 0;
+      }
+
+      .cardIluminada::before {
+          filter: blur(3px+);
+          opacity: 0.5;
+      }
+
+      @keyframes girar {
+          0% {
+              --angle: 0deg;
+          }
+          100% {
+              --angle: 360deg;
+          }
+      }
+  
+  
   </style>
+  
   <div class="container">
     <div id="header" class="item item-1">1</div>
     <div id="sidebar" class="item item-2">2</div>
     <div id="content" class="item item-3">3</div>
     <div id="footer" class="item item-4">4</div>
   </div>
-</x-layouts.app>
+  <div class="w-full mt-2 h-[950px] pb-12 bg-black flex justify-center items-center">
+    <div class=" cardIluminada relative bg-black">
+      <div class="w-96 mx-auto bg-black text-white  relative p-10 border border-white rounded-lg">
+        <h1 class="text-5xl pb-4">Card Iluminada</h1>
+        <h3 class="font-[Merriweather]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto ducimus
+          fugit ipsa maiores non
+          perferendis
+          quaerat qui repellat vero voluptatum? Molestias quibusdam, unde! Adipisci aperiam libero quasi recusandae
+          similique, tempora. Adipisci alias architecto assumenda commodi dignissimos fuga harum hic impedit laborum,
+          natus
+          nesciunt nostrum odio, quibusdam reiciendis rem sed sit!</h3>
+      </div>
+    </div>
+  </div>
+
+</x-layouts.page>

@@ -16,7 +16,8 @@
             
             $hideNoActives = Generaloptions::where('name', 'hide_no_actives')->pluck('value')[0];
             $hideNoStock = Generaloptions::where('name', 'hide_no_existences')->pluck('value')[0];
-            // $onlyRegisterCanView = Generaloptions::get('only_register_can_view', '0');
+            $alwaysFav = Generaloptions::where('name', 'favoritos_banner_siempre')->pluck('value')[0];
+            $onlyRegisterView = Generaloptions::where('name', 'only_register_view')->pluck('value')[0];
             
             if ($request->category) {
                 $laid = $request->category;

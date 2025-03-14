@@ -1,4 +1,4 @@
-<x-layouts.app :meta-title='__("Favorites")' :header-text='__("Favorites")'>
+<x-layouts.page :meta-title='__("Favorites")' :header-text='__("Favorites")'>
   <div class="px-4 sm:px-6 lg:px-8">
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
@@ -79,4 +79,4 @@
     </div>
   </div>
   <script src="{{asset('js/favorites.js')}}"></script>
-</x-layouts.app>
+</x-layouts.page>
