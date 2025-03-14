@@ -41,7 +41,6 @@
     Route::get('/favorites', [FavoriteController::class, 'getFavorites'])->name('favorites');
     Route::post('/favorites', [FavoriteController::class, 'eliminarCookieFav'])->name('favorites.eliminar');
     
-    
     Route::get('/grids', function () {
         return view('grids');
     });

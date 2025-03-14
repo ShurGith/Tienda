@@ -24,7 +24,6 @@
             
             return view('product.index', [
               'products' => $products,
-                //'title' => 'Productos de nuestra tienda',
             ]);
         }
         

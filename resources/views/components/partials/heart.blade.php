@@ -8,7 +8,7 @@
         z-index: 100;
     }
 </style>
-<div data-id="{{ $product->id }}" data-tipo="heart-button"
+<div data-id="{{ $product->id }}" data-tipo="heart-button" data-nameproduct="{{ $product->name }}"
      class="{{$enFavorites ? 'text-green-500': ''}} cursor-pointer border text-xs flex items-center bg-gray-50 pr-2 text-gray-400 hover:bg-gray-300">
   <button>
     <x-heroicon-m-heart

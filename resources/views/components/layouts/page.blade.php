@@ -53,6 +53,6 @@
 <x-footer/>
 @filamentScripts
 
-<script src="../js/code.js"></script>
+<script src="{{asset('js/code.js')}}"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@
         </div>
         <div class="flex flex-col items-center w-full justify-center gap-y-6 mb-4">
           <!-- Name -->
-          <h3 class="z-12 text-xl font-bold text-gray-500 mt-2">
+          <h3 class="z-12 text-xl font-bold text-gray-500 mt-2" data-role="name-product">
             <a href="{{ route('products.show', $product) }}">{{ $product->name }} </a>
           </h3>
           <!-- ### PRECIOS ### -->
@@ -44,8 +44,7 @@
     </div>
   @endforeach
 </div>
-<div class=" mt-2
-          ">
+<div class=" mt-2 ">
   {{ $products->links() }}
 </div>
 <script src="{{asset('js/favorites.js')}}"></script>

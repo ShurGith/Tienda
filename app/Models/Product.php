@@ -131,12 +131,13 @@
         
         public function getStars()
         {
+            $starsDir = '/images/page/stars/';
             $salida = "";
             $quitaUno = 0;
             $stars = $this->stars;
-            $starFull = config('url')."/images/page/star-full.svg";
-            $starHalf = config('url')."/images/page/star-half.svg";
-            $starEmpty = config('url')."/images/page/star-empty.svg";
+            $starFull = config('url').$starsDir."star-full.svg";
+            $starHalf = config('url').$starsDir."star-half.svg";
+            $starEmpty = config('url').$starsDir."star-empty.svg";
             $decimales = intval(substr($stars, -1));
             $enteros = intval(substr($stars, 0, 1));
             for ($i = 0; $i < $enteros; $i++) {

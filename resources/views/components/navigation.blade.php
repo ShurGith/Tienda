@@ -4,8 +4,8 @@
       <div class="flex h-16 items-center justify-between px-4 sm:px-0">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img class="size-8"
-                 src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+            <img class="size-12"
+                 src="{{asset('storage/images/page/logo.png')}}"
                  alt="Your Company"/>
           </div>
           <div class="md:block">
@@ -35,17 +35,17 @@
             @php
               $myc = json_decode(request()->cookie('cookie_favorites', '[]'), true);
               if($myc)
-                 $favos = count($myc);
+                 $countFavos = count($myc);
               else
-               $favos=false;
+               $countFavos=false;
             @endphp
-            <div id="div-favorites" class="relative {{ $favos ? '': 'hidden' }}">
+            <div id="div-favorites" class="relative {{ $countFavos ? '': 'hidden' }}">
               <a href="{{route('favorites')}}">
                 <div
                   class="absolute -left-2 -top-2 bg-white rounded-full w-4 h-4 flex  justify-center items-center">
-                  <p class="text-black text-xs contador">{{$favos}}</p>
+                  <p class="text-black text-xs contador">{{$countFavos}}</p>
                 </div>
-                <svg class="size-6 shrink-0 text-gray-300 {{ $favos ?? 'hidden'}} " fill="none"
+                <svg class="size-6 shrink-0 text-gray-300 {{ $countFavos ?? 'hidden'}} " fill="none"
                      viewBox="0 0 24 24"
                      stroke-width="1.5"
                      stroke="currentColor"
@@ -214,9 +214,14 @@
   
   <div id="flashMessage"
        class="fixed w-full flex top-20 justify-end items-end overflow-x-hidden ">
-    <div class=" flex justify-center translate-x-full transition-all duration-500">
+    <div class="flex justify-center translate-x-full transition-all duration-500">
       @include('components.layouts.flash-messages')
       {{--      @if(strpos($_SERVER['REQUEST_URI'], '/products/') !== false)--}}
+      @if (session()->has('eliminado'))
+        <x-layouts.flash-eliminado :message="$message"/>
+        {{--      @elseif(session()->has('eliminado_parcial'))
+                <x-layouts.flash-eliminado_parcial :message="$message"/>--}}
+      @endif
       <x-layouts.flash-unic :message="$message"/>
       {{--      @endif--}}
     </div>

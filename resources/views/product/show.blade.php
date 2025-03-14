@@ -22,9 +22,9 @@
   <!-- ## Sección Principal ## -->
   <section class="mx-auto max-w-2xl lg:max-w-none">
     <!-- Product -->
-    <div class="lg:grid lg:grid-cols-[65%_35%] lg:items-start">
+    <div class="lg:grid lg:grid-cols-2 gap-6 lg:items-start">
       <!-- Image gallery -->
-      <div class="flex flex-col pr-2">
+      <div class="flex flex-col border">
         <div id="marco">
           <div id="img-div"
                class="cursor-pointer rounded-xl w-full min-w-full h-96 bg-cover  bg-no-repeat h-[580px] aspect-auto object-cover"
@@ -54,7 +54,8 @@
       </div>
       <!-- Product info -->
       <div class="pt-12 flex flex-col justify-center items-center gap-y-4 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-        <h1 class="text-5xl mb-4 font-bold tracking-tight text-gray-900">{{ $product->name }}</h1>
+        <h1 class="text-5xl mb-4 font-bold tracking-tight text-gray-900"
+            data-role="name-product">{{ $product->name }}</h1>
         <!-- Precio -->
         @include('components.partials.precios' ,[ "textFinal" => "text-3xl"])
         <!-- Fin Precio -->

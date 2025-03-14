@@ -64,11 +64,11 @@
               <a href="{{ route('products.show', $product) }}">
                 <x-heroicon-s-eye class="h-6 w-6 text-blue-500"></x-heroicon-s-eye>
               </a>
-              <form method="post" action="{{route('favorites.toggle',$product->id)}}">
+              <form method="post" action="{{route('favorites.toggle',$product)}}">
                 @csrf
                 <input type="hidden" name="unico" value="1">
-                <button type="submit">
-                  <x-heroicon-o-trash class="btn btn-delete text-red-500 h-6 w-6"></x-heroicon-o-trash>
+                <button data-role="btnTotal" type="submit">
+                  <x-heroicon-o-trash class="btn cursor-pointer btn-delete text-red-500 h-6 w-6"></x-heroicon-o-trash>
                 </button>
               </form>
             </td>
