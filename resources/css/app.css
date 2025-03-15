@@ -51,6 +51,15 @@
         .colorCard {
             @apply absolute bg-rose-300 ;
         }
+
+        .cardFavoritos {
+            @apply h-18 relative w-full max-w-[600px] rounded-tl rounded-bl p-4 flex items-center justify-evenly transition-all duration-1500;
+        }
+
+        .animateBarra {
+            @apply h-1 absolute top-0 right-0 animate-[barra_4s_linear_forwards] ;
+        }
+
     }
 }
 

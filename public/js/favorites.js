@@ -1,17 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const btnsFav = document.querySelectorAll('[data-tipo=heart-button]'),
 		btnsTotals = document.querySelectorAll('[data-role=btnTotal]'),
-		divFavorites = document.getElementById("div-favorites"),
-		flashMenssage = document.getElementById('flashMessage'),
-		dataInfos = document.querySelectorAll('[data-role=info]'),
-		btnFlash = flashMenssage.querySelector('button'),
-		flashDelete = document.getElementById('flashdelete'),
-		contador = document.querySelector(".contador");
+		contadorFavs = document.getElementById("div-favorites"), flashVisible = document.getElementById('flashVisible'),
+		btnFlash = flashVisible.querySelector('button'), flashDelete = document.getElementById('flashdelete'),
+		dataInfos = document.querySelectorAll('[data-role=info]'), contador = document.querySelector(".contador");
 	let url = window.location.href.includes('/products/');
 	alldelete = false;
 	const containsString = (obj, str) => {
 		return Object.values(obj).some(value => typeof value === 'string' && value.includes(str));
 	};
+	
 	
 	if (btnFlash !== null) {
 		btnFlash.addEventListener('click', () => {
@@ -19,33 +17,33 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 	
-	
 	const quitaFlash = () => {
-		flashMenssage.firstElementChild.classList.add('translate-x-full');
-		if (flashDelete !== null)
+		nuevoDiv.classList.add('translate-x-full')
+		setTimeout(function () {
+			nuevoDiv.remove()
+		}, 1200)
+		if (flashDelete !== null) {
 			setTimeout(function () {
 				flashDelete.classList.add('hidden');
-			}, 1000);
-		for (btn of btnsFav)
-			btn.classList.remove('pointer-events-none');
+			}, 1000)
+		}
+		
+		//	for (btn of btnsFav) btn.classList.remove('pointer-events-none');
 	};
 	
 	const muestraFlash = () => {
-		flashMenssage.firstElementChild.classList.remove('translate-x-full');
+		nuevoDiv.classList.remove('translate-x-full')
 		setTimeout(quitaFlash, 3000);
 	};
 	const toggleA = (elemento) => {
 		elemento.classList.toggle('text-green-500');
 		const tipText = elemento.querySelectorAll('[data-tipo=tip-text]');
-		for (t of tipText)
-			t.classList.toggle('hidden');
+		for (t of tipText) t.classList.toggle('hidden');
 	};
 	
-	if (flashDelete !== null)
-		alldelete = true;
+	if (flashDelete !== null) alldelete = true;
 	
-	if (alldelete == true)
-		setTimeout(muestraFlash, 300);
+	if (alldelete == true) setTimeout(muestraFlash, 300);
 	
 	
 	btnsTotals.forEach((btnTot) => {
@@ -54,13 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 	
+	const origenDiv = document.querySelector("#flashVisible");
+	let copiarAd = document.querySelector("#fav-show-add")
+	let copiarRem = document.querySelector("#fav-show-remove")
+	
+	const clonaAdd = (pasado) => {
+		nuevoDiv = pasado.cloneNode(true)
+		origenDiv.prepend(nuevoDiv); // Agrega e
+		setTimeout(muestraFlash, 200);
+	}
+	
 	
 	btnsFav.forEach((btnFav) => {
 		btnFav.addEventListener("click", function () {
 			productId = this.getAttribute("data-id");
-			this.classList.add('pointer-events-none');
-			for (dato of dataInfos)
-				dato.innerText = this.dataset.nameproduct;
+			//this.classList.add('pointer-events-none');
+			for (dato of dataInfos) dato.innerText = this.dataset.nameproduct;
 			alldelete = true;
 			toggleA(this);
 			fetch(`/favorites/toggle/${productId}`, {
@@ -73,24 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
 				.then(data => {
 					if (containsString(data.favorites, productId)) {
 						contador.innerText = (+contador.innerText) + 1;
-						//if (url == true) {
-						document.querySelector('.fav-show-add').classList.remove('hidden');
-						document.querySelector('.fav-show-remove').classList.add('hidden');
-						muestraFlash();
-						//	}
-						
+						clonaAdd(copiarAd);
 					} else {
 						contador.innerText = (+contador.innerText) - 1;
-						//	if (url == true) {
-						document.querySelector('.fav-show-remove').classList.remove('hidden');
-						document.querySelector('.fav-show-add').classList.add('hidden');
-						muestraFlash();
-						//	}
+						clonaAdd(copiarRem);
 					}
 					if (contador.innerText === "0") {
-						divFavorites.classList.add('hidden');
+						contadorFavs.classList.add('hidden');
 					} else {
-						divFavorites.classList.remove('hidden');
+						contadorFavs.classList.remove('hidden');
 					}
 				});
 		});

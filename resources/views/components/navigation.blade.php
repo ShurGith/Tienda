@@ -212,18 +212,12 @@
     </div>
   </div>
   
-  <div id="flashMessage"
-       class="fixed w-full flex top-20 justify-end items-end overflow-x-hidden ">
-    <div class="flex justify-center translate-x-full transition-all duration-500">
+  <div id="flashMessage" class="fixed w-full flex top-20 justify-end items-end overflow-x-hidden ">
+    <div id="flashVisible" class="flex flex-col justify-center">
       @include('components.layouts.flash-messages')
-      {{--      @if(strpos($_SERVER['REQUEST_URI'], '/products/') !== false)--}}
       @if (session()->has('eliminado'))
         <x-layouts.flash-eliminado :message="$message"/>
-        {{--      @elseif(session()->has('eliminado_parcial'))
-                <x-layouts.flash-eliminado_parcial :message="$message"/>--}}
       @endif
       <x-layouts.flash-unic :message="$message"/>
-      {{--      @endif--}}
     </div>
-  </div>
 </nav>
