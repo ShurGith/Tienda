@@ -1,6 +1,6 @@
 models:
   Product:
-    name: string index
+    name: string index.blade.php
     description: longtext nullable
     images: json nullable
     features: longtext nullable
@@ -16,19 +16,19 @@ models:
       belongsTo: User, Category
 
   Featuretitle:
-    title: string index
+    title: string index.blade.php
     text: longtext
     timestamps: false
     relationships:
       belongsTo: Product
 
   Generaloptions:
-    name: string index
+    name: string index.blade.php
     value: string
     timestamps: false
 
   Category:
-    name: string index
+    name: string index.blade.php
     bgcolor: text nullable
     color: string nullable
     image: text nullable
@@ -39,7 +39,7 @@ models:
       hasMany: Tag
 
   Tag:
-    name: string index
+    name: string index.blade.php
     bgcolor: text nullable
     color: string nullable
     image: text nullable
@@ -57,6 +57,35 @@ models:
     relationships:
       hasMany: Product
 
+  Blog:
+    title: string
+    content: longtext nullable
+    images: text nullable
+    active: boolean default:0
+    date_published: timestamp
+    relationships:
+      belongsTo: User, Categoryblog
+
+  Categoryblog:
+    name: string
+    ico_active: boolean default:0
+    image: string nullable
+    icon: string nullable
+    color: string nullable
+    bg_color: string nullable
+    relationships:
+      belongsToMany: Blog
+      hasMany: Tagblog
+
+  Tagblog:
+    name: string
+    ico_active: boolean default:0
+    image: string nullable
+    icon: string nullable
+    color: string nullable
+    bg_color: string nullable
+    relationships:
+      belongsTo: CategoryBlog
 
 controllers:
   Product:

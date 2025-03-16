@@ -53,7 +53,7 @@
         }
 
         .cardFavoritos {
-            @apply transition duration-500 translate-x-full relative h-18 z-10 w-full max-w-[600px] rounded-tl rounded-bl p-4 flex items-center justify-evenly;
+            @apply transition-transform translate-x-full duration-500 relative h-18 z-10 w-full max-w-[600px] rounded-tl rounded-bl p-4 flex items-center justify-evenly;
         }
 
         .animateBarra {
@@ -76,6 +76,7 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+
 
 @keyframes barra {
     0% {

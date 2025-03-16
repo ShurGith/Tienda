@@ -40,7 +40,6 @@
         
         public function getImgPal()
         {
-            // if (isset($this->images)) {
             if (isset($this->images)) {
                 if (count($this->images) > 0) {
                     return asset($this->images[0]);

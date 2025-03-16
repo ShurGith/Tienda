@@ -104,7 +104,7 @@
         public static function getPages(): array
         {
             return [
-              'index' => Pages\ListCategories::route('/'),
+              'index.blade.php' => Pages\ListCategories::route('/'),
               'create' => Pages\CreateCategory::route('/create'),
                 //'edit' => Pages\EditCategory::route('/{record}/edit'),
             ];

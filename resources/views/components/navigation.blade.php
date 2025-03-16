@@ -214,12 +214,11 @@
   
   <!-- <div id="flashMessage" class="-z-10 fixed   flex top-20 justify-end items-end overflow-x-hidden ">-->
   <div id="flashVisible"
-       class="fixed w-max top-20 right-0 flex items-end flex-col justify-center">
+       class="fixed w-max -top-20 right-0 flex items-end flex-col gap-1 justify-center">
     @include('components.layouts.flash-messages')
     @if (session()->has('eliminado'))
       <x-layouts.flash-eliminado :message="$message"/>
     @endif
     <x-layouts.flash-unic :message="$message"/>
   </div>
-
 </nav>

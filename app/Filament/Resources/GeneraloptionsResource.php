@@ -80,7 +80,7 @@
         public static function getPages(): array
         {
             return [
-              'index' => Pages\ListGeneraloptions::route('/'),
+              'index.blade.php' => Pages\ListGeneraloptions::route('/'),
               'create' => Pages\CreateGeneraloptions::route('/create'),
               'edit' => Pages\EditGeneraloptions::route('/{record}/edit'),
             ];

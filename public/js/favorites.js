@@ -1,12 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const btnsFav = document.querySelectorAll('[data-tipo=heart-button]'),
 		btnsTotals = document.querySelectorAll('[data-role=btnTotal]'),
-		contadorFavs = document.getElementById("div-favorites"),
-		//btnFlash = flashVisible.querySelector('button'),
-		contador = document.querySelector(".contador"),
-		bannerAdd = document.querySelector("#fav-show-add"),
-		bannerRem = document.querySelector("#fav-show-remove"),
+		contadorFavs = document.getElementById("div-favorites"), //btnFlash = flashVisible.querySelector('button'),
+		contador = document.querySelector(".contador"), contenedor = document.getElementById("flashVisible"),
+		bannerAdd = document.querySelector("#fav-show-add"), bannerRem = document.querySelector("#fav-show-remove"),
 		bannerDel = document.querySelector("#flashdelete");
+	
+	let avisoId = 0;
+	const colaAvisos = [];
+	
+	const quitaFlash = (pasado) => {
+		pasado.classList.remove('translate-none');
+		pasado.querySelector('.flashBarra').classList.remove('animateBarra');
+	};
+	
+	const muestraFlash = (pasado) => {
+		pasado.classList.add('translate-x-full');
+		pasado.querySelector('.flashBarra').classList.add('animateBarra');
+		
+		setTimeout(function () {
+			quitaFlash(pasado);
+		}, 4000);
+	};
+	
+	
+	crearNuevo = function (pasado) {
+		avisoId++;
+		nuevoDiv = pasado.cloneNode(true)
+		nuevoDiv.dataset.id = avisoId
+		contenedor.appendChild(nuevoDiv);
+		colaAvisos.push(nuevoDiv);
+		setTimeout(() => {
+			nuevoDiv.classList.add('translate-none')
+		}, 0)
+		nuevoDiv.querySelector('.flashBarra').classList.add('animateBarra');
+		setTimeout(() => {
+			quitaFlash(colaAvisos[0])
+		}, 4000)
+		setTimeout(() => {
+			const primerAviso = colaAvisos.shift();
+			if (nuevoDiv.parentNode) {
+				primerAviso.remove();
+			}
+		}, 4200);
+	};
 	
 	
 	alldelete = false;
@@ -21,19 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 	*/
-	const quitaFlash = (pasado) => {
-		pasado.classList.remove('translate-x-0');
-		pasado.querySelector('.flashBarra').classList.remove('animateBarra');
-	};
 	
-	const muestraFlash = (pasado) => {
-		pasado.classList.add('translate-x-0');
-		pasado.querySelector('.flashBarra').classList.add('animateBarra');
-		setTimeout(function () {
-			quitaFlash(pasado);
-		}, 4000);
-		
-	};
 	
 	const toggleA = (elemento) => {
 		elemento.classList.toggle('text-green-500');
@@ -70,11 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					if (containsString(data.favorites, productId)) {
 						contador.innerText = (+contador.innerText) + 1;
 						bannerAdd.querySelector('[data-role=info]').innerText = this.dataset.nameproduct;
-						muestraFlash(bannerAdd);
+						crearNuevo(bannerAdd);
 					} else {
 						contador.innerText = (+contador.innerText) - 1;
 						bannerRem.querySelector('[data-role=info]').innerText = this.dataset.nameproduct;
-						muestraFlash(bannerRem);
+						crearNuevo(bannerRem);
 					}
 					if (contador.innerText === "0") {
 						contadorFavs.classList.add('hidden');

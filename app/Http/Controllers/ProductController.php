@@ -33,7 +33,7 @@
             
             $request->session()->flash('product.id', $product->id);
             
-            return redirect()->route('products.index');
+            return redirect()->route('products.index.blade.php');
         }
         
         public function create(Request $request): View
@@ -68,14 +68,14 @@
             
             $request->session()->flash('product.id', $product->id);
             
-            return redirect()->route('products.index');
+            return redirect()->route('products.index.blade.php');
         }
         
         public function destroy(Request $request, Product $product): RedirectResponse
         {
             $product->delete();
             
-            return redirect()->route('products.index');
+            return redirect()->route('products.index.blade.php');
         }
         
         public function buyit(Request $request, Product $product): View

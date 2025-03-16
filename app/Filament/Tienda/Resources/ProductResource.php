@@ -190,7 +190,7 @@
         public static function getPages(): array
         {
             return [
-              'index' => Pages\ListProducts::route('/'),
+              'index.blade.php' => Pages\ListProducts::route('/'),
               'create' => Pages\CreateProduct::route('/create'),
               'edit' => Pages\EditProduct::route('/{record}/edit'),
             ];

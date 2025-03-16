@@ -73,6 +73,11 @@
             return $this->hasMany(Product::class);
         }
         
+        public function blog(): HasMany
+        {
+            return $this->hasMany(Blog::class);
+        }
+        
         
         public function initials(): string
         {

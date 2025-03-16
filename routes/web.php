@@ -1,5 +1,6 @@
 <?php
     
+    use App\Http\Controllers\BlogController;
     use App\Http\Controllers\FavoriteController;
     use App\Http\Controllers\HomeControler;
     use App\Http\Controllers\LanguageController;
