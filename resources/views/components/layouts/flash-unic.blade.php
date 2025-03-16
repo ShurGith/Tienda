@@ -1,18 +1,3 @@
-<style>
-    @keyframes barra {
-        0% {
-            width: 0%;
-        }
-        75% {
-            width: 100%;
-        }
-        100% {
-            width: 0%;
-        }
-    }
-</style>
-
-
 <div id="fav-show-add" class="cardFavoritos translate-x-full bg-green-50">
   <div class="flashBarra animateBarra  bg-green-400 "></div>
   <div class="flex items-center gap-2 ">

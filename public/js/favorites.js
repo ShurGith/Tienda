@@ -1,22 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const btnsFav = document.querySelectorAll('[data-tipo=heart-button]'),
 		btnsTotals = document.querySelectorAll('[data-role=btnTotal]'),
-		contadorFavs = document.getElementById("div-favorites"), flashVisible = document.getElementById('flashVisible'),
-		btnFlash = flashVisible.querySelector('button'), flashDelete = document.getElementById('flashdelete'),
-		dataInfos = document.querySelectorAll('[data-role=info]'), contador = document.querySelector(".contador");
+		contadorFavs = document.getElementById("div-favorites"),
+		flashVisible = document.getElementById('flashVisible'),
+		//btnFlash = flashVisible.querySelector('button'),
+		flashDelete = document.getElementById('flashdelete'),
+		dataInfos = document.querySelectorAll('[data-role=info]'),
+		contador = document.querySelector(".contador");
 	let url = window.location.href.includes('/products/');
 	alldelete = false;
 	const containsString = (obj, str) => {
 		return Object.values(obj).some(value => typeof value === 'string' && value.includes(str));
 	};
 	
-	
+	/*
 	if (btnFlash !== null) {
 		btnFlash.addEventListener('click', () => {
 			quitaFlash();
 		});
 	}
-	
+	*/
 	const quitaFlash = () => {
 		nuevoDiv.classList.add('translate-x-full')
 		setTimeout(function () {
@@ -28,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}, 1000)
 		}
 		
-		//	for (btn of btnsFav) btn.classList.remove('pointer-events-none');
+		//	for (btn of btnsFav) btn.classList.toggle('pointer-events-none');
 	};
 	
 	const muestraFlash = () => {
@@ -67,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		btnFav.addEventListener("click", function () {
 			productId = this.getAttribute("data-id");
 			//this.classList.add('pointer-events-none');
+			//for (btn of btnsFav) btn.classList.toggle('pointer-events-none');
 			for (dato of dataInfos) dato.innerText = this.dataset.nameproduct;
 			alldelete = true;
 			toggleA(this);
