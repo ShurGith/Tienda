@@ -3,37 +3,39 @@
     namespace App\Http\Controllers;
     
     use App\Models\Blog;
+    use App\Models\Categoryblog;
+    use App\Models\Tagblog;
     use Illuminate\Http\Request;
     
     class BlogController extends Controller
     {
-        /**
-         * Display a listing of the resource.
-         */
         public function index(Request $request)
         {
-            $posts = Blog::when($request->category, fn($query) => $query->where('category_id', $request->category))
-              ->paginate(20);
+            if ($request->category) {
+                $laId = $request->category;
+                $elNombre = Categoryblog::where('id', $laId)->pluck('name')[0];
+                $posts = Blog::with(['tags', 'category'])
+                  ->whereHas('category', fn($query) => $query->where('category_id', $laId))
+                  ->paginate(20);
+                $title = __('Listing Posts with category: ').$elNombre;
+            } elseif ($request->tag) {
+                $laId = $request->tag;
+                $elNombre = Tagblog::where('id', $laId)->pluck('name')[0];
+                $posts = Blog::with(['tags', 'category'])
+                  ->whereHas('tags', fn($query) => $query->where('tag_id', $laId))
+                  ->paginate(20);
+                $title = __('Listing Posts with tag: ').$elNombre;
+            } else {
+                $posts = Blog::with(['tags', 'category'])->paginate(16);
+                $title = __('Listing Posts');
+            }
             
             return view('blog.index', [
               'posts' => $posts,
-              'title' => "Listado de las entradas de Blog",
+              'title' => $title,
             ]);
         }
         
-        /*        public function categorias($id)
-                {
-                    $posts = Blog::where('id', $id)->paginate(20);
-                    
-                    return view('blog.index', [
-                      'posts' => $posts,
-                      'title' => "Listado de las entradas de Blog",
-                    ]);
-                }
-                */
-        /**
-         * Store a newly created resource in storage.
-         */
         public function store(Request $request)
         {
             //

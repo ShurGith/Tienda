@@ -2,7 +2,9 @@
     
     namespace App\Providers;
     
+    use Barryvdh\Debugbar\Facades\Debugbar;
     use BezhanSalleh\PanelSwitch\PanelSwitch;
+    use Illuminate\Foundation\AliasLoader;
     use Illuminate\Support\ServiceProvider;
     
     
@@ -27,5 +29,7 @@
                   ->visible(fn(): bool => auth()->user()->isAdmin())
                   ->slideOver();
             });
+            $loader = AliasLoader::getInstance();
+            $loader->alias('Debugbar', Debugbar::class);
         }
     }

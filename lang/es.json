@@ -325,5 +325,8 @@
   "Units": "Unidades",
   "Unit": "Unidad",
   "Rating:": "Valoración:",
-  "Admin Panel - Login": "Panel de Administración - Iniciar Sesión"
+  "Listing Posts": "Mostrando los Posts",
+  "Listing Posts with tag: ": "Mostrando los posts etiquetados con: ",
+  "Listing Posts with category: ": "Mostrando los posts de la categoría: ",
+  "Wellcome to my online store: ": "Bienvenidos a mi tienda online "
 }

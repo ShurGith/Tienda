@@ -4,8 +4,10 @@
     
     use App\Http\Requests\ProductStoreRequest;
     use App\Http\Requests\ProductUpdateRequest;
+    use App\Models\Category;
     use App\Models\Generaloptions;
     use App\Models\Product;
+    use App\Models\Tag;
     use Illuminate\Http\RedirectResponse;
     use Illuminate\Http\Request;
     use Illuminate\View\View;
@@ -16,14 +18,43 @@
         {
             $hideNoActives = Generaloptions::where('name', 'hide_no_actives')->pluck('value')[0];
             $hideNoStock = Generaloptions::where('name', 'hide_no_existences')->pluck('value')[0];
+            $alwaysFav = Generaloptions::where('name', 'favoritos_banner_siempre')->pluck('value')[0];
+            $onlyRegisterView = Generaloptions::where('name', 'only_register_view')->pluck('value')[0];
             
-            $products = Product::with(['tags', 'category'])
-              ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
-              ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0))
-              ->paginate(12);
+            if ($request->category) {
+                $laid = $request->category;
+                $elNombre = Category::where('id', $laid)->pluck('name')[0];
+                $titulo = " Productos de la categoría \"$elNombre\"";
+                $products = Product::with(['tags', 'category'])
+                  ->whereHas('category',
+                    function ($query) use ($hideNoStock, $hideNoActives, $laid) {
+                        $query->where('category_id', $laid)
+                          ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
+                          ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0));
+                    })->paginate(12);
+                
+            } elseif ($request->tag) {
+                $laid = $request->tag;
+                $elNombre = Tag::where('id', $laid)->pluck('name')[0];
+                $titulo = "Productos de la etiqueta \"$elNombre \"";
+                $products = Product::with(['tags', 'categories'])
+                  ->whereHas('tags', function ($query) use ($hideNoStock, $hideNoActives, $laid) {
+                      $query->where('tag_id', $laid)
+                        ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
+                        ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0));
+                  })->paginate(12);
+                
+            } else {
+                $titulo = "Listado de productos";
+                $products = Product::with(['tags', 'category'])
+                  ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
+                  ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0))
+                  ->paginate(50);
+            }
             
             return view('product.index', [
               'products' => $products,
+              'title' => $titulo,
             ]);
         }
         

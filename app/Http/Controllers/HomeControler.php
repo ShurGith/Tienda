@@ -2,10 +2,9 @@
     
     namespace App\Http\Controllers;
     
-    use App\Models\Category;
+    use App\Models\Blog;
     use App\Models\Generaloptions;
     use App\Models\Product;
-    use App\Models\Tag;
     use Illuminate\Http\Request;
     use Illuminate\View\View;
     
@@ -19,39 +18,23 @@
             $alwaysFav = Generaloptions::where('name', 'favoritos_banner_siempre')->pluck('value')[0];
             $onlyRegisterView = Generaloptions::where('name', 'only_register_view')->pluck('value')[0];
             
-            if ($request->category) {
-                $laid = $request->category;
-                $elNombre = Category::where('id', $laid)->pluck('name')[0];
-                $titulo = " Productos de la categoría \"$elNombre\"";
-                $products = Product::with(['tags', 'category'])
-                  ->whereHas('category',
-                    function ($query) use ($hideNoStock, $hideNoActives, $laid) {
-                        $query->where('category_id', $laid)
-                          ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
-                          ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0));
-                    })->paginate(12);
-                
-            } elseif ($request->tag) {
-                $laid = $request->tag;
-                $elNombre = Tag::where('id', $laid)->pluck('name')[0];
-                $titulo = "Productos de la etiqueta \"$elNombre \"";
-                $products = Product::with(['tags', 'categories'])
-                  ->whereHas('tags', function ($query) use ($hideNoStock, $hideNoActives, $laid) {
-                      $query->where('tag_id', $laid)
-                        ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
-                        ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0));
-                  })->paginate(12);
-                
-            } else {
-                $titulo = "Listado de productos";
-                $products = Product::with(['tags'])
-                  ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
-                  ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0))
-                  ->paginate(50);
-            }
-            return view('product.index', [
+            $titulo = "Listado de productos";
+            $products = Product::with(['tags', 'category'])
+              ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
+              ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0))
+              ->orderBy('created_at', 'DESC')
+              ->get()
+              ->take(12);
+            
+            $posts = Blog::with(['tags', 'category'])
+              ->orderBy('created_at', 'DESC')
+              ->get()
+              ->take(12);
+            
+            return view('components.layouts.home', [
               'products' => $products,
-              'title' => $titulo,
+              'posts' => $posts,
+              'title' => __('Wellcome to my online store: '),
               'hideNoActives' => $hideNoActives
             ]);
         }

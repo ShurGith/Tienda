@@ -73,6 +73,7 @@ models:
     icon: string nullable
     color: string nullable
     bg_color: string nullable
+    timestamps: false
     relationships:
       belongsToMany: Blog
       hasMany: Tagblog
@@ -84,8 +85,13 @@ models:
     icon: string nullable
     color: string nullable
     bg_color: string nullable
+    timestamps: false
     relationships:
       belongsTo: CategoryBlog
+
+  BlogTag:
+    tag_id: foreignId
+    blog_id: foreignId
 
 controllers:
   Product:

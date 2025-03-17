@@ -5,6 +5,7 @@
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
+    use Illuminate\Database\Eloquent\Relations\BelongsToMany;
     use Laravolt\Avatar\Facade as Avatar;
     
     class Blog extends Model
@@ -42,4 +43,8 @@
             return $this->belongsTo(Categoryblog::class);
         }
         
+        public function tags(): BelongsToMany
+        {
+            return $this->belongsToMany(Tag::class);
+        }
     }

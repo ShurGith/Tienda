@@ -44,7 +44,3 @@
     </div>
   @endforeach
 </div>
-<div class=" mt-2 ">
-  {{ $products->links() }}
-</div>
-<script src="{{asset('js/favorites.js')}}"></script>
