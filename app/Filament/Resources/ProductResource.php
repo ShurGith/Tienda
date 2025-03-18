@@ -11,7 +11,12 @@
     use Filament\Forms\Components\TextInput;
     use Filament\Forms\Form;
     use Filament\Forms\Get;
-    use Filament\Infolists\Components\Tabs;
+    use Filament\Infolists\Components\Grid;
+    use Filament\Infolists\Components\IconEntry;
+    use Filament\Infolists\Components\ImageEntry;
+    use Filament\Infolists\Components\Section;
+    use Filament\Infolists\Components\Split as SplitInfolist;
+    use Filament\Infolists\Components\TextEntry;
     use Filament\Infolists\Infolist;
     use Filament\Resources\Resource;
     use Filament\Support\Enums\FontFamily;
@@ -84,7 +89,7 @@
                   ->columnSpanFull(),
                 Repeater::make('features')
                   ->translateLabel()
-                  ->relationship('featuresproducts')
+                  ->relationship('featuretitles')
                   ->schema([
                     TextInput::make('title')->required()->label('nombre'),
                     TiptapEditor::make('text')
@@ -194,8 +199,8 @@
                   //
               ])
               ->actions([
-                Tables\Actions\EditAction::make(),
-                  // ->slideOver(),
+                Tables\Actions\EditAction::make()
+                  ->slideOver(),
                 Tables\Actions\ViewAction::make(),
               ])
               ->bulkActions([
@@ -215,35 +220,131 @@
         public static function getPages(): array
         {
             return [
-              'index.blade.php' => Pages\ListProducts::route('/'),
+              'index' => Pages\ListProducts::route('/'),
               'create' => Pages\CreateProduct::route('/create'),
               'edit' => Pages\EditProduct::route('/{record}/edit'),
+              'view' => Pages\ViewProduct::route('/{record}'),
             
             ];
         }
         
         
-        public function productInfolist(Infolist $infolist): Infolist
+        public static function infolist(Infolist $infolist): Infolist
         {
+            Infolist::$defaultNumberLocale = config('app.locale');
             return $infolist
-              // ->record($this->product)
               ->schema([
-                Tabs::make('Tabs')
-                  ->tabs([
-                    Tabs\Tab::make('Tab 1')
-                      ->schema([
-                          // ...
+                Section::make()
+                  ->schema([
+                    Grid::make(4)->schema([
+                      SplitInfolist::make([
+                        Section::make([
+                          Grid::make()->schema([
+                            TextEntry::make('name')
+                              ->badge()
+                              ->color('info')
+                              ->translateLabel(),
+                            TextEntry::make('price')
+                              ->money('EUR', divideBy: 100, locale: 'es')
+                              ->badge()
+                              ->color('info')
+                              ->translateLabel(),
+                          ]),
+                          Grid::make()->schema([
+                            TextEntry::make('price')
+                              ->label('Final Price')
+                              ->badge()
+                              ->hidden(fn($record) => !$record->oferta)
+                              ->formatStateUsing(fn($record
+                              ) => number_format($record->price / 100 * (1 - $record->descuento / 100),
+                                  2, ',', '.').' €'),
+                            TextEntry::make('price')
+                              ->label('Saving')
+                              ->badge()
+                              ->color('success')
+                              ->hidden(fn($record) => !$record->oferta)
+                              ->formatStateUsing(fn($record
+                              ) => number_format($record->price / 100 * ($record->descuento / 100),
+                                  2, ',', '.').' €')
+                              ->translateLabel(),
+                            TextEntry::make('descuento')
+                              ->suffix('%')
+                              ->badge()
+                              ->color('info')
+                              ->label('Discount')
+                              ->translateLabel(),
+                            TextEntry::make('units')
+                              ->badge()
+                              ->color('info')
+                              ->label('Stock')
+                              ->numeric()
+                              ->translateLabel(),
+                          ]),
+                        ]),
                       ]),
-                    Tabs\Tab::make('Tab 2')
-                      ->schema([
-                          // ...
+                        /*
+                         * ViewEntry::make('stars')
+                          ->view('components.filament.stars')
+                          ->translateLabel()
+                          ->label('Stars'),
+                          TextEntry::make('stars')
+                                 ->badge()
+                                 ->color('info')
+                                 ->translateLabel(),*/
+                      
+                      SplitInfolist::make([
+                        Section::make([
+                          Grid::make()->schema([
+                            IconEntry::make('active')
+                              ->size(IconEntry\IconEntrySize::ExtraLarge)
+                              ->translateLabel(),
+                            IconEntry::make('oferta')
+                              ->size(IconEntry\IconEntrySize::ExtraLarge)
+                              ->label('Offer')
+                              ->translateLabel(),
+                          ]),
+                          Grid::make()->schema([
+                            TextEntry::make('category.name')
+                              ->label('Category')
+                              ->translateLabel()
+                              ->badge()
+                              ->color('success'),
+                            TextEntry::make('tags.name')
+                              ->label('Tags')
+                              ->translateLabel()
+                              ->badge(),
+                          ]),
+                          Grid::make()->schema([
+                            TextEntry::make('stars')
+                              ->translateLabel()
+                              ->formatStateUsing(fn($record) => $record->getStars())
+                              ->html()
+                              ->badge(),
+                            TextEntry::make('created_at')
+                              ->label('Created')
+                              ->badge()
+                              ->color('info')
+                              ->date()
+                              ->sinceTooltip()
+                              ->translateLabel(),
+                          ])
+                        ])
                       ]),
-                    Tabs\Tab::make('Tab 3')
-                      ->schema([
-                          // ...
-                      ]),
+                      SplitInfolist::make([
+                        Section::make([
+                          TextEntry::make('user.name')
+                            ->label('Seller')
+                            ->badge()
+                            ->color('info')
+                            ->translateLabel(),
+                          ImageEntry::make('images')
+                            ->label('Images')
+                            ->height(100)
+                            ->translateLabel(),
+                        ]),
+                      ])->columnSpan(2),
+                    ])
                   ])
-                  // ...
               ]);
         }
         

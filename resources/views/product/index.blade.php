@@ -1,7 +1,7 @@
 <x-layouts.page :meta-title="isset($title )? $title . ' - ' .config('app.name') : config('app.name')"
                 :header-text="isset($title) ? $title . ' - ' .config('app.name') : config('app.name')">
   
-  <x-products-list :products="$products"/>
+  @include('product.index-content')
   <div class=" mt-2 ">
     {{ $products->links() }}
   </div>

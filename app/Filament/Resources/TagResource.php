@@ -109,7 +109,7 @@
         public static function getPages(): array
         {
             return [
-              'index.blade.php' => Pages\ListTags::route('/'),
+              'index' => Pages\ListTags::route('/'),
               'create' => Pages\CreateTag::route('/create'),
                 //'edit' => Pages\EditTag::route('/{record}/edit'),
             ];

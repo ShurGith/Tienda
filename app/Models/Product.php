@@ -134,9 +134,9 @@
             $salida = "";
             $quitaUno = 0;
             $stars = $this->stars;
-            $starFull = config('url').$starsDir."star-full.svg";
-            $starHalf = config('url').$starsDir."star-half.svg";
-            $starEmpty = config('url').$starsDir."star-empty.svg";
+            $starFull = config('url').$starsDir."star-full.webp";
+            $starHalf = config('url').$starsDir."star-half.webp";
+            $starEmpty = config('url').$starsDir."star-empty.webp";
             $decimales = intval(substr($stars, -1));
             $enteros = intval(substr($stars, 0, 1));
             for ($i = 0; $i < $enteros; $i++) {
@@ -152,7 +152,7 @@
                 }
             }
             if ($enteros + $quitaUno > 0) {
-                return $salida;
+                return '<div class="flex">'.$salida.'</div>';
             }
         }
         
