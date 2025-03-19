@@ -32,10 +32,11 @@
         {
             FilamentView::registerRenderHook(
               PanelsRenderHook::TOPBAR_START,//USER_MENU_BEFORE
-              fn(
-              ) => '<a  class="border font-semibold border rounded-lg px-3 py-2 text-sm" href=\' /\'>Home</a>'.((auth()->user()->isAdmin()) ? (strpos($_SERVER['REQUEST_URI'],
+              fn() => '<a class="border font-semibold border rounded-lg px-3 py-2 text-sm" href="/">Home</a>
+                    <a class="border font-semibold border rounded-lg px-3 py-2 text-sm" href=" /dashboard">'.__('Dashboard').'</a>'
+                .((auth()->user()->isAdmin()) ? (strpos($_SERVER['REQUEST_URI'],
                     'tienda') !== false && strpos($_SERVER['REQUEST_URI'],
-                    'users') === false) ? '<a  class="border font-semibold border rounded-lg px-3 py-2 text-sm" href=\' /admin\'>DashBoard</a>' : '<a  class="border font-semibold border rounded-lg px-3 py-2 text-sm" href=\' /tienda\'>Tienda</a> ' : ''),
+                    'users') === false) ? '<a  class="border font-semibold border rounded-lg px-3 py-2 text-sm" href="/admin">'.__('Admin Panel').'</a>' : '<a  class="border font-semibold border rounded-lg px-3 py-2 text-sm" href=\' /tienda\'>Tienda</a> ' : ''),
             );
             
             return $panel

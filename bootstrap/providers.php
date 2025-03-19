@@ -1,7 +1,8 @@
 <?php
-
-return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\Filament\AdminPanelProvider::class,
-    App\Providers\Filament\TiendaPanelProvider::class,
-];
+    
+    return [
+      App\Providers\AppServiceProvider::class,
+      App\Providers\Filament\AdminPanelProvider::class,
+      App\Providers\Filament\TiendaPanelProvider::class,
+      App\Providers\CookiesServiceProvider::class,
+    ];

@@ -133,7 +133,7 @@
     <div id="content" class="item item-3">3</div>
     <div id="footer" class="item item-4">4</div>
   </div>
-  <div class="w-full mt-2 h-[950px] pb-12 bg-black flex justify-center items-center">
+  <div class="w-full mt-2 h-[950px] pb-12 bg-black flex justify-center items-center flex-col ">
     <div class=" cardIluminada relative bg-black">
       <div class="w-96 mx-auto bg-black text-white  relative p-10 border border-white rounded-lg">
         <h1 class="text-5xl pb-4">Card Iluminada</h1>
@@ -145,6 +145,25 @@
           natus
           nesciunt nostrum odio, quibusdam reiciendis rem sed sit!</h3>
       </div>
+    </div>
+    
+    <ul>
+      <li class="mt-4 border ml-4 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es el contenido</li>
+      <li class="mt-4 border ml-4 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es el contenido</li>
+      <li class="mt-4 border ml-4 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es el contenido</li>
+      <li class="mt-4 border ml-4 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es el contenido</li>
+    </ul>
+    <div class="active mt-4 border ml-4 bg-blue-600 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es
+      el DIVISOr
+    </div>
+    <div class="mt-4 border ml-4 bg-blue-600 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es el
+      DIVISOr
+    </div>
+    <div class="mt-4 border ml-4 bg-blue-600 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es el
+      DIVISOr
+    </div>
+    <div class="mt-4 border ml-4 bg-blue-600 border-white not-active:bg-amber-400  px-4 pt-2 text-white">Este es el
+      DIVISOr
     </div>
   </div>
 

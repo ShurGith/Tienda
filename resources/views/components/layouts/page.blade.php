@@ -22,6 +22,7 @@
     <!-- Styles / Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   
+  @cookieconsentscripts
   @filamentStyles
 </head>
 <body class="antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]">

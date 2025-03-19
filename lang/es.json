@@ -332,5 +332,7 @@
   "Listing Posts with tag: ": "Mostrando los posts etiquetados con: ",
   "Listing Posts with category: ": "Mostrando los posts de la categoría: ",
   "Wellcome to my online store: ": "Bienvenidos a mi tienda online ",
-  "Saving": "Ahorro"
+  "Saving": "Ahorro",
+  "This cookie helps us remember your preferences regarding the interface's brightness.": "Esta cookie nos ayuda a recordar tus preferencias respecto al colorido de la interfaz",
+  "DarkMode": "Modo Oscuro"
 }

@@ -18,12 +18,24 @@
       ->middleware(['auth', 'verified'])
       ->name('dashboard');
     
+    Route::middleware(['auth', 'verified'])->group(function () {
+        Route::view('dashboard', 'dashboard')->name('dashboard');
+        /*        Route::get('/admin', function () {
+                    return redirect('/admin'); // Redirige al panel de Filament
+                })->name('admin.panel');
+                Route::get('/tienda', function () {
+                    return redirect('/tienda');
+                })->name('admin.tienda');*/
+    });
+    
+    
     Route::middleware(['auth'])->group(function () {
         Route::redirect('settings', 'settings/profile');
         
         Route::get('settings/profile', Profile::class)->name('settings.profile');
         Route::get('settings/password', Password::class)->name('settings.password');
         Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+        
     });
     
     require __DIR__.'/auth.php';
