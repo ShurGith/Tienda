@@ -13,6 +13,7 @@
             Schema::create('blogs', function (Blueprint $table) {
                 $table->id();
                 $table->string('title');
+                $table->string('slug')->nullable();
                 $table->longText('content')->nullable();
                 $table->text('images')->nullable();
                 $table->boolean('active')->default(0);

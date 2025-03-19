@@ -1,0 +1,2 @@
+<img src="<?php echo e(asset('images/page/logo.png')); ?>" alt="<?php echo e(config('app.name'). " - Logo Image"); ?>" <?php echo e($attributes); ?>/>
+<?php /**PATH /Users/juanjose/Herd/Tienda/resources/views/components/app-logo-icon.blade.php ENDPATH**/ ?>

@@ -11,14 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			OperaMenu();
 		})
 		document.addEventListener('click', (evento) => {
-			if (evento.target !== imagmenu)
-				if (!menu.classList.contains('opacity-0'))
-					OperaMenu();
+			if (evento.target !== imagmenu) if (!menu.classList.contains('opacity-0')) OperaMenu();
 		})
 		document.addEventListener('keydown', (evento) => {
 			const keyCode = evento.key;
-			if (!menu.classList.contains('opacity-0') && keyCode === 'Escape') nrb
-			OperaMenu();
+			if (!menu.classList.contains('opacity-0') && keyCode === 'Escape') OperaMenu();
 		})
 	}
 })

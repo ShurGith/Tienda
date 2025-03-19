@@ -46,7 +46,9 @@
          */
         public function show(Blog $blog)
         {
-            //
+            return view('blog.show', [
+              'post' => $blog,
+            ]);
         }
         
         /**

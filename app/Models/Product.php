@@ -26,6 +26,7 @@
           'stars',
           'user_id',
           'category_id',
+          'slug'
         ];
         
         protected $casts = [

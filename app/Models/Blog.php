@@ -14,7 +14,7 @@
         
         protected $fillable = [
           'title', 'content', 'images', 'category_id', 'active',
-          'date_published', 'user_id',
+          'date_published', 'user_id', 'slug'
         ];
         
         protected $casts = [

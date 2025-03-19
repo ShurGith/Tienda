@@ -35,6 +35,13 @@
         --color-accent-content: var(--color-white);
         --color-accent-foreground: var(--color-neutral-800);
     }
+
+    .clamp-post > p {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 }
 
 @layer base {
@@ -71,6 +78,7 @@
     @apply !mb-0 !leading-tight;
 }
 
+
 input:focus[data-flux-control],
 textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
@@ -89,3 +97,4 @@ select:focus[data-flux-control] {
         width: 0%;
     }
 }
+

@@ -19,19 +19,26 @@
     use Filament\Infolists\Components\TextEntry;
     use Filament\Infolists\Infolist;
     use Filament\Resources\Resource;
+    use Filament\Support\Assets\Js;
     use Filament\Support\Enums\FontFamily;
     use Filament\Support\Enums\FontWeight;
+    use Filament\Support\Facades\FilamentAsset;
     use Filament\Tables;
     use Filament\Tables\Columns\TextColumn;
     use Filament\Tables\Columns\ToggleColumn;
     use Filament\Tables\Table;
     use FilamentTiptapEditor\Enums\TiptapOutput;
     use FilamentTiptapEditor\TiptapEditor;
+    use Illuminate\Support\Str;
+    
+    FilamentAsset::register([
+        //Js::make('example-local-script', asset('js/slug.js')),
+      Js::make('slug', asset('/js/slug.js')),
+    ]);
     
     class ProductResource extends Resource
     {
         protected static ?string $model = Product::class;
-        
         protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
         protected static ?string $navigationGroup = 'Productos';
         protected static ?string $modelLabel = 'producto';
@@ -44,8 +51,13 @@
                 Split::make([
                   Forms\Components\TextInput::make('name')
                     ->translateLabel()
-                    ->required()
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state)))
+                    ->id('inputName')
                     ->maxLength(255),
+                  Forms\Components\TextInput::make('slug')
+                    ->id('inputSlug')
+                    ->required()
+                    ->label('Slug'),
                   Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->label('Seller')
@@ -228,7 +240,6 @@
             ];
         }
         
-        
         public static function infolist(Infolist $infolist): Infolist
         {
             Infolist::$defaultNumberLocale = config('app.locale');
@@ -244,15 +255,19 @@
                               ->badge()
                               ->color('info')
                               ->translateLabel(),
-                            TextEntry::make('price')
-                              ->money('EUR', divideBy: 100, locale: 'es')
+                            TextEntry::make('slug')
                               ->badge()
                               ->color('info')
                               ->translateLabel(),
                           ]),
                           Grid::make()->schema([
                             TextEntry::make('price')
-                              ->label('Final Price')
+                              ->money('EUR', divideBy: 100, locale: 'es')
+                              ->badge()
+                              ->color('info')
+                              ->translateLabel(),
+                            TextEntry::make('price')
+                              ->label('Sale Price')
                               ->badge()
                               ->hidden(fn($record) => !$record->oferta)
                               ->formatStateUsing(fn($record
@@ -280,8 +295,8 @@
                               ->numeric()
                               ->translateLabel(),
                           ]),
-                        ]),
-                      ]),
+                        ])
+                      ])->columnSpanFull(),
                         /*
                          * ViewEntry::make('stars')
                           ->view('components.filament.stars')
@@ -342,11 +357,10 @@
                             ->height(100)
                             ->translateLabel(),
                         ]),
-                      ])->columnSpan(2),
+                      ])->columnSpan(2)
                     ])
                   ])
               ]);
         }
-        
         
     }

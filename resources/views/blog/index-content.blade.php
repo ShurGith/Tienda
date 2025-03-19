@@ -8,14 +8,14 @@
       <div class="w-full min-w-full h-62 bg-cover bg-no-repeat "
            style="background-image:url( {{ $post->getImgPal() }});">
       </div>
-      <div class="w-full h-48 justify-items-center">
+      <div class="w-full justify-items-center">
         <!-- The Title -->
         <h2 class="text-2xl font-semibold font-[Lobster] ">{{ $post->title }}</h2>
         <h5 class="mt-2 font-[Lobster] text-sm">{{ $post->user->name }}</h5>
         <!-- The Content -->
-        <p class="px-4 mt-4 line-clamp-4 ">  {!! $post->content !!}</p>
+        <div class="px-2  mt-4 line-clamp-5">  {!! $post->content !!}</div>
       </div>
-      <div class="mt-2 p-2">
+      <div class="mt-4 p-2">
         <!-- The Categories -->
         <a class="font-semibold font-[Lobster] px-2 py-1 rounded"
            style="background: {{$post->category->bg_color}}; color:{{$post->category->color}}" href="{{url('blog?category='.$post->category_id)}}
