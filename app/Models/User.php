@@ -7,6 +7,7 @@
     use Filament\Panel;
     use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
     use Illuminate\Support\Str;
@@ -32,9 +33,7 @@
             if ($panel->getId() === 'admin') {
                 return $this->isAdmin();
             }
-            
             return true;
-            // return str_ends_with($this->email, '@gmail.com') && $this->hasVerifiedEmail();
         }
         
         public function isAdmin(): bool
@@ -43,15 +42,26 @@
         }
         
         // Relación con órdenes como comprador
+        
         public function purchases(): HasMany
         {
             return $this->hasMany(Order::class, 'buyer_id');
+        }
+        
+        public function purchasesCount(): int
+        {
+            return Order::where('buyer_id', $this->id)->count();
         }
         
         // Relación con órdenes como vendedor
         public function sales(): HasMany
         {
             return $this->hasMany(Order::class, 'seller_id');
+        }
+        
+        public function salesCount(): int
+        {
+            return Order::where('seller_id', $this->id)->count();
         }
         
         public function getFilamentAvatarUrl(): ?string
@@ -63,9 +73,16 @@
             }
         }
         
-        public function getCountProducts(): int
+        public function getCountProducts()
         {
-            return $this->products()->count();
+            return Product::where('user_id', $this->id)->count();
+            
+        }
+        
+        public function getCountPosts(): int
+        {
+            return Blog::where('user_id', $this->id)->count();
+            
         }
         
         public function products(): HasMany

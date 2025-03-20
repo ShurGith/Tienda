@@ -11,7 +11,7 @@
     use Illuminate\Support\Facades\Route;
     
     Route::get('/', function () {
-        return view('home');
+        return view('layouts/page', ["metaTitle" => "Inicio"]);
     })->name('home');
     
     Route::view('dashboard', 'dashboard')
@@ -20,12 +20,6 @@
     
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::view('dashboard', 'dashboard')->name('dashboard');
-        /*        Route::get('/admin', function () {
-                    return redirect('/admin'); // Redirige al panel de Filament
-                })->name('admin.panel');
-                Route::get('/tienda', function () {
-                    return redirect('/tienda');
-                })->name('admin.tienda');*/
     });
     
     

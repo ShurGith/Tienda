@@ -7,19 +7,20 @@
 <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
   <flux:sidebar.toggle class="lg:hidden" icon="x-mark"/>
   
-  <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
+  <a href="{{ route('home') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
     <x-app-logo/>
   </a>
   
   <flux:navlist variant="outline">
     <flux:navlist.group :heading="__('Platform')" class="grid">
-      <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+      <flux:navlist.item icon="home-modern" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                          wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+      <flux:navlist.item icon="home" :href="url('/')">{{ __('Home') }}</flux:navlist.item>
     </flux:navlist.group>
-    <flux:spacer/>
+    <flux:spacer class="my-2 border-b-2 border-zinc-200 dark:border-zinc-700"/>
     <flux:navlist.group :heading="__('Control')" class="grid">
       @if(Auth::user()->isAdmin())
-        <flux:navlist.item icon="command-line" :href="url('/admin')">{{ __('Admin') }}</flux:navlist.item>
+        <flux:navlist.item icon="command-line" :href="url('/admin')">{{ __('Administrator') }}</flux:navlist.item>
       @endif
       <flux:navlist.item icon="building-storefront" :href="url('/tienda')">{{ __('Shop') }}</flux:navlist.item>
     </flux:navlist.group>
@@ -102,7 +103,7 @@
                                     <span
                                       class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
                                     >
-                                        {{ auth()->user()->initials() }}
+                                        <img src="{{ auth()->user()->avatar }}" alt="">
                                     </span>
                                 </span>
             

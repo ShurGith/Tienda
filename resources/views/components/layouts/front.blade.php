@@ -1,5 +1,6 @@
 @props([
-'metaTitle' => 'Home'
+'metaTitle' => isset($title )? $title . ' - ' .config('app.name') : config('app.name'),
+'headerText' => isset($title )? $title . ' - ' .config('app.name') : config('app.name'),
 ])
   <!DOCTYPE html>
 <html class="h-full bg-gray-100" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -9,10 +10,12 @@
   <meta name="application-name" content="{{ config('app.name') }}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ config('app.name').'-'. $metaTitle ?? "Live" }}</title>
+  <title>{{  $metaTitle ?? "Live" }}</title>
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.bunny.net/css?family=asar:400|bad-script:400|flamenco:300,400" rel="stylesheet"/>
+  <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet"/>
   
   @php
     if(isset($css)){
@@ -27,7 +30,7 @@
 </head>
 <body class="antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]">
 <div class="bg-gray-800 pb-32">
-  <x-navigation :message="$metaTitle"/>
+  <x-navigation :message="$headerText"/>
   <header class="py-10">
     <div class="flex flex-col mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h1 class="text-2xl font-bold tracking-tight text-white">{{ $headerText ??''}}</h1>

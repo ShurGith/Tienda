@@ -1,4 +1,4 @@
-<x-layouts.page>
+<x-layouts.front>
   <style>
       :root {
           --clr-dark: #0f172a;
@@ -167,4 +167,4 @@
     </div>
   </div>
 
-</x-layouts.page>
+</x-layouts.front>

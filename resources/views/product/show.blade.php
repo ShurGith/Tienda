@@ -18,7 +18,7 @@
         conic-gradient(#000 0 0) content-box;
     }
 </style>
-<x-layouts.page :meta-title="$product->name" :header-text="$product->name">
+<x-layouts.front :meta-title="$product->name" :header-text="$product->name">
   <!-- ## Sección Principal ## -->
   <section class="mx-auto max-w-2xl lg:max-w-none">
     <!-- Product -->
@@ -199,7 +199,7 @@
     </div>
   </section>
   <!-- Fin Repeater con Adicionales -->
-</x-layouts.page>
+</x-layouts.front>
 
 <!-- Modal Imagen -->
 <div class="relative -z-10 transition-all ease-out duration-300 opacity-0" data-role="modal-image" role="dialog"

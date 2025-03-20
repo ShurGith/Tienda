@@ -41,3 +41,4 @@
     </div>
   @endforeach
 </div>
+<script src="{{asset('js/favorites.js')}}"></script>

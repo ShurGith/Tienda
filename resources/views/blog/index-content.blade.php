@@ -8,23 +8,27 @@
       <div class="w-full min-w-full h-62 bg-cover bg-no-repeat "
            style="background-image:url( {{ $post->getImgPal() }});">
       </div>
-      <div class="w-full justify-items-center">
+      <div class="w-full justify-items-center text-zinc-500 font-[Lobster]">
         <!-- The Title -->
-        <h2 class="text-2xl font-semibold font-[Lobster] ">{{ $post->title }}</h2>
-        <h5 class="mt-2 font-[Lobster] text-sm">{{ $post->user->name }}</h5>
+        <a href="{{route('blog.show', $post->id) }}" class="mt-4 text-xl font-bold">
+          {{ $post->title }}
+        </a>
+        <h5 class="mt-2 text-sm">{{ $post->user->name }}</h5>
         <!-- The Content -->
-        <div class="px-2  mt-4 line-clamp-5">  {!! $post->content !!}</div>
+        <div class="px-2  mt-4 text-sm line-clamp-5">  {!! $post->content !!}</div>
       </div>
       <div class="mt-4 p-2">
         <!-- The Categories -->
-        <a class="font-semibold font-[Lobster] px-2 py-1 rounded"
-           style="background: {{$post->category->bg_color}}; color:{{$post->category->color}}" href="{{url('blog?category='.$post->category_id)}}
-          "> {{ $post->category->name }}</a>
-        @foreach($post->tags as $tag)
+        @isset($post->category)
           <a class="font-semibold font-[Lobster] px-2 py-1 rounded"
-             style="background: {{$tag->bg_color}}; color:{{$tag->color}}" href="{{url('blog?tag='.$tag->id)}}
+             style="background: {{$post->category->bg_color}}; color:{{$post->category->color}}" href="{{url('blog?category='.$post->category_id)}}
+          "> {{ $post->category->name }}</a>
+          @foreach($post->tags as $tag)
+            <a class="font-semibold font-[Lobster] px-2 py-1 rounded"
+               style="background: {{$tag->bg_color}}; color:{{$tag->color}}" href="{{url('blog?tag='.$tag->id)}}
           "> {{ $tag->name }}</a>
-        @endforeach
+          @endforeach
+        @endisset
       </div>
     </div>
   @endforeach

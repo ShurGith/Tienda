@@ -67,7 +67,12 @@
             @apply h-1 absolute top-0 right-0 animate-[barra_4s_linear_forwards] ;
         }
 
+
     }
+}
+
+.h4front {
+    @apply text-gray-600 text-6xl ml-6 mb-6 font-bold font-[Lobster] first-letter:text-9xl first-letter:text-amber-600 first-letter:float-none;
 }
 
 [data-flux-field] {
@@ -85,16 +90,25 @@ select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
 
+.userpanel-text {
+    @apply text-sm ;
+}
+
+.userpanelcount-number {
+    @apply
+    font-medium leading-none whitespace-nowrap ;
+}
+
+.userpanelcount-little {
+    @apply text-xs font-medium leading-none whitespace-nowrap;
+}
 
 @keyframes barra {
-    0% {
+    0%, 100% {
         width: 0%;
     }
     50% {
         width: 100%;
-    }
-    100% {
-        width: 0%;
     }
 }
 

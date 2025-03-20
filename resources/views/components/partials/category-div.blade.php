@@ -1,6 +1,5 @@
 <a href="{{url('/?category='.$product->category->id)}}">
-  
-  <div class="flex items-center gap-1 py-1 px-2.5 rounded text-xs"
+  <div class="py-1 px-2.5 rounded text-xs mx-auto max-w-max"
        style="background:{{ $product->category->bgcolor }}; color:{{$product->category->color}}">
     @if($product->category->icon_active)
       <div class="mr-1" style="color:{{$category->color}}">

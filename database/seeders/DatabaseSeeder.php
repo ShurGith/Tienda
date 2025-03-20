@@ -2,6 +2,7 @@
     
     namespace Database\Seeders;
     
+    use App\Models\Blog;
     use App\Models\Category;
     use App\Models\Generaloptions;
     use App\Models\Product;
@@ -65,6 +66,16 @@
                   'user_id' => rand(1, 10),
                   'category_id' => rand(1, 5),
                   'active' => fake()->boolean(),
+                ]);
+            }
+            
+            for ($i = 0; $i < 200; $i++) {
+                Blog::factory()->create([
+                  'title' => fake()->sentence(3),
+                  'content' => fake()->paragraph(5),
+                  'user_id' => rand(1, 5),
+                  'active' => rand(0, 1),
+                
                 ]);
             }
         }

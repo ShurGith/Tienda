@@ -12,13 +12,7 @@
             <div class="ml-10 flex items-baseline space-x-4">
               <x-partials.nav-link href="{{ route('home') }}"
                                    :active="request()->routeIs('home')">{{  __('Home') }}</x-partials.nav-link>
-              @auth
-                @php
-                  $url =  Auth::user()->isAdmin() ? '/admin/login':'/user';
-                @endphp
-                <x-partials.nav-link href="{{ route('dashboard') }}"
-                                     :active="request()->routeIs('dashboard')">{{  __('Dashboard') }}</x-partials.nav-link>
-              @endauth
+              
               <x-partials.nav-link href="{{ route('products.index') }}"
                                    :active="request()->routeIs('products.index')">{{  __('Productos') }}</x-partials.nav-link>
               <x-partials.nav-link href="{{ route('blog.index') }}"
@@ -27,6 +21,13 @@
                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
               <a href="#"
                  class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>
+              @auth
+                @php
+                  $url =  Auth::user()->isAdmin() ? '/admin/login':'/user';
+                @endphp
+                <x-partials.nav-link href="{{ route('dashboard') }}"
+                                     :active="request()->routeIs('dashboard')">{{  __('Dashboard') }}</x-partials.nav-link>
+              @endauth
             </div>
           </div>
         </div>
