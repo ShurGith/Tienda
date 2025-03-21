@@ -22,27 +22,26 @@
         <flux:divis.datos :little="false" :texto="'Blog Post'" :icon="'book-open'"
                           :count="auth()->user()->getCountProducts()"/>
       </div>
-      <div
-        class="relative flex flex-col h-[320px] aspect-video rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <div class="relative flex justify-center items-center space-x-2 text-zinc-400">
+      <div class="relative aspect-video overflow-y-auto rounded-xl border border-neutral-200 dark:border-neutral-700">
+        <div class="header-div-datos">
           <flux:icon.book-open-text/>
-          <h3 class="text-xl">{{ __('User Posts') }}</h3>
+          <h3>{{ __('User Posts') }}</h3>
         </div>
-        <div class="flex flex-col w-full pl-6 overflow-y-scroll">
+        <div class="flex flex-col w-full pl-6">
           @foreach(auth()->user()->blog as $post)
-            <a class="link" href="{{ route('blog.show', $post->id) }}">{{ $post->title }}</a>
+            <a class="link-div-datos" href="{{ route('blog.show', $post->id) }}">{{ $post->title }}</a>
           @endforeach
         </div>
       </div>
       <div
-        class="relative relative flex flex-col h-[320px] aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <div class="relative flex justify-center items-center space-x-2 text-zinc-400">
+        class="relative aspect-video overflow-y-auto rounded-xl border border-neutral-200 dark:border-neutral-700">
+        <div class="header-div-datos">
           <flux:icon.shopping-cart/>
-          <h3 class="text-xl">{{ __('User Products') }}</h3>
+          <h3>{{ __('User Products') }}</h3>
         </div>
-        <div class=" flex flex-col w-full pl-6 overflow-y-scroll">
+        <div class="flex flex-col w-full pl-6">
           @foreach(auth()->user()->products as $product)
-            <a class="link"
+            <a class="link-div-datos"
                href="{{ route('products.show', $product->id) }}">{{ $product->name }}<span
                 class="text-zinc-400 text-xs"> -  {{$product->precios($product->price)}}
               <span class="decimales-precios !text-xs">{{ $product->precios($product->price, true) }}</span>&nbsp€
@@ -54,6 +53,9 @@
     <div
       class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
       <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20"/>
+      <flux:graphics.moto-reparto/>
+      <flux:graphics.man-working/>
+      <flux:graphics.man-gris/>
     </div>
   </div>
 </x-layouts.app>

@@ -103,8 +103,12 @@ select:focus[data-flux-control] {
     @apply text-xs font-medium leading-none whitespace-nowrap;
 }
 
-.link {
-    @apply text-orange-400 transition-colors duration-200 hover:text-orange-600 max-w-fit;
+.header-div-datos {
+    @apply sticky top-0 bg-white flex justify-center items-center border-b-1 gap-2 py-1 text-sm text-zinc-400;
+}
+
+.link-div-datos {
+    @apply text-orange-400 text-xs transition-colors duration-200 hover:text-orange-600 max-w-fit;
 }
 
 .decimales-precios {

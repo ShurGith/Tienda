@@ -1,8 +1,4 @@
-@props([
-'metaTitle' => isset($title )? $title . ' - ' .config('app.name') : config('app.name'),
-'headerText' => isset($title )? $title . ' - ' .config('app.name') : config('app.name'),
-])
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html class="h-full bg-gray-100" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
   <meta charset="utf-8">
@@ -29,10 +25,10 @@
   @filamentStyles
 </head>
 <body class="antialiased grid min-h-dvh grid-rows-[auto_1fr_auto]">
-<div class="bg-gray-800 pb-32">
-  <x-navigation :message="$headerText"/>
-  <header class="py-10">
-    <div class="flex flex-col mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="bg-gray-800">
+  <x-navigation :message="$headerText ?? ''"/>
+  <header class="bg-gray-800 pt-12 grid-row-1">
+    <div class="flex flex-col mx-auto mb-48 max-w-7xl px-4 sm:px-6 lg:px-8">
       <h1 class="text-2xl font-bold tracking-tight text-white">{{ $headerText ??''}}</h1>
       <button type="button"
               class="ml-44 max-w-fit mt-2 flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 {{ (!Request::get('tag') && !Request::get('category')) ? 'hidden' : ''}} "

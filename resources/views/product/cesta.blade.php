@@ -1,20 +1,5 @@
-<x-layouts.front :meta-title='__("Favorites")' :header-text='__("Favorites")'>
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet"/>
+<x-layouts.front :meta-title='__("Shopping cart")' :header-text='__("Shopping cart")'>
   <div class="px-4 sm:px-6 lg:px-8">
-    <div class="sm:flex sm:items-center">
-      <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold text-gray-900">{{__("Your Saved Favorites")}}</h1>
-      </div>
-      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none {{ count($products)===1 ? 'hidden' :''}}">
-        <form method="post" action="{{route('favorites.eliminar')}}">
-          @csrf
-          <button type="submit"
-                  class="cursor-pointer block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-            {{ __('Delete All') }}
-          </button>
-        </form>
-      </div>
-    </div>
     <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
@@ -29,7 +14,7 @@
           <th scope="col"
               class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ __('Offer') }}
           </th>
-          <th scope="col" class="relative text-right py-3.5 pl-3 pr-4 sm:pr-6">{{ __('Actions') }}
+          <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">{{ __('Actions') }}
             <span class="sr-only">{{ __('Actions') }}</span>
           </th>
         </tr>
@@ -61,33 +46,15 @@
                 </span>
               @endif
             </td>
-            <td class="flex items-center justify-end gap-2 py-3.5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-              
-              @if(!strpos(request()->cookie('cookie_compras'), $product->id))
-                <button data-tooltip-target="tooltip-dark" type="button"
-                        class="ms-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Dark tooltip
-                </button>
-                
-                <div id="tooltip-dark" role="tooltip"
-                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                  Tooltip content
-                  <div class="tooltip-arrow" data-popper-arrow></div>
-                </div>
-                <div class="relative">
-                  <a href="{{ route('cesta.buyit', $product) }}" alt="{{ __('Add to bag') }}">
-                    <x-heroicon-o-shopping-cart class="h-6 w-6 text-amber-500"></x-heroicon-o-shopping-cart>
-                  </a></div>
-              @endif
+            <td class="flex items-center justify-center gap-2 py-3.5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
               <a href="{{ route('products.show', $product) }}">
                 <x-heroicon-o-eye class="h-6 w-6 text-blue-500"></x-heroicon-o-eye>
               </a>
-              <form method="post" action="{{route('favorites.toggle',$product)}}">
+              <form method="post" action="{{route('cesta.cookie',$product)}}">
                 @csrf
                 <input type="hidden" name="unico" value="1">
                 <button data-role="btnTotal" type="submit">
-                  <x-heroicon-o-trash
-                    class="btn cursor-pointer btn-delete text-red-500 h-6 w-6"></x-heroicon-o-trash>
+                  <x-heroicon-o-trash class="btn cursor-pointer btn-delete text-red-500 h-6 w-6"></x-heroicon-o-trash>
                 </button>
               </form>
             </td>
@@ -98,5 +65,4 @@
     </div>
   </div>
   <script src="{{asset('js/favorites.js')}}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </x-layouts.front>

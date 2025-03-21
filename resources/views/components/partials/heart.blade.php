@@ -1,6 +1,3 @@
-@props([
-    'enFavorites' => strpos(request()->cookie('cookie_favorites'), $product->id),
-  ])
 <style>
     [data-tipo="heart-button"]:hover [data-role='tooltip'] {
         opacity: 1;

@@ -37,7 +37,7 @@
                 $laid = $request->tag;
                 $elNombre = Tag::where('id', $laid)->pluck('name')[0];
                 $titulo = "Productos de la etiqueta \"$elNombre \"";
-                $products = Product::with(['tags', 'categories'])
+                $products = Product::with(['tags', 'category'])
                   ->whereHas('tags', function ($query) use ($hideNoStock, $hideNoActives, $laid) {
                       $query->where('tag_id', $laid)
                         ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
@@ -109,10 +109,4 @@
             return redirect()->route('products.index.blade.php');
         }
         
-        public function buyit(Request $request, Product $product): View
-        {
-            return view('product.buyit', [
-              'product' => $product,
-            ]);
-        }
     }

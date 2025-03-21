@@ -15,7 +15,7 @@
     <flux:navlist.group :heading="__('Platform')" class="grid">
       <flux:navlist.item icon="home-modern" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                          wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-      <flux:navlist.item icon="home" :href="url('/')">{{ __('Home') }}</flux:navlist.item>
+      <flux:navlist.item icon="home" :href="url('/')">{{ __('Front Page') }}</flux:navlist.item>
     </flux:navlist.group>
     <flux:spacer class="my-2 border-b-2 border-zinc-200 dark:border-zinc-700"/>
     <flux:navlist.group :heading="__('Control')" class="grid">

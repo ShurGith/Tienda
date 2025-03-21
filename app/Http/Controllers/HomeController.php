@@ -8,7 +8,7 @@
     use Illuminate\Http\Request;
     use Illuminate\View\View;
     
-    class HomeControler extends Controller
+    class HomeController extends Controller
     {
         public function home(Request $request): View
         {
@@ -34,7 +34,7 @@
             return view('components.layouts.home', [
               'products' => $products,
               'posts' => $posts,
-              'title' => __('Wellcome to my online store: '),
+              'title' => __('Welcome to my online store: '),
               'hideNoActives' => $hideNoActives
             ]);
         }

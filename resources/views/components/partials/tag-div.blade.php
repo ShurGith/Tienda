@@ -1,4 +1,4 @@
-<a href="{{url('/?tag='.$tag->id)}}">
+<a href="{{url('/products?tag='.$tag->id)}}">
   <div class="flex items-center gap-1 py-1 px-2.5 rounded text-xs"
        style="background:{{ $tag->bgcolor }}; color:{{$tag->color}}">
     @if($tag->icon_active)

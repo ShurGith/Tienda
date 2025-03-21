@@ -1,3 +1,7 @@
+@props([
+    'enFavorites' => strpos(request()->cookie('cookie_favorites'), $product->id),
+    'enCompras' => strpos(request()->cookie('cookie_compras'), $product->id),
+  ])
 <style>
     [data-role="tab-info"] {
         display: grid;
@@ -24,10 +28,10 @@
     <!-- Product -->
     <div class="lg:grid lg:grid-cols-2 gap-6 lg:items-start">
       <!-- Image gallery -->
-      <div class="flex flex-col border">
+      <div class="flex flex-col">
         <div id="marco">
           <div id="img-div"
-               class="cursor-pointer rounded-xl w-full min-w-full h-96 bg-cover  bg-no-repeat h-[580px] aspect-auto object-cover"
+               class="cursor-pointer rounded-xl w-full min-w-full h-96 bg-cover bg-center bg-no-repeat h-[580px] aspect-auto object-cover"
                style="background-image:url( {{ $product->getImgPal() }});">
           </div>
         </div>
@@ -107,10 +111,12 @@
           <!-- Botón Compra y Botón Favorito -->
           <div class="flex items-center gap-x-4">
             <!-- Botón Add to Bag -->
-            <a href="{{ route('product.buyit', $product) }}"
-               class="py-2 px-4 bg-gray-500 hover:bg-gray-600 transition-all rounded-md text-white duration-200">
-              {{__('Add to bag')}}
-            </a>
+            @if(!$enCompras)
+              <a href="{{ route('cesta.buyit', $product) }}"
+                 class="py-2 px-4 bg-gray-500 hover:bg-gray-600 transition-all rounded-md text-white duration-200">
+                {{__('Add to bag')}}
+              </a>
+            @endif
             <!--Fin Botón Add to Bag -->
             <!-- Corazón Favoritos -->
             @include('components.partials.heart')
@@ -157,7 +163,7 @@
     <!-- Categorías y Etiquetas -->
     <div>
       <h2 id="details-heading" class="">{{ __('Categories') }}</h2>
-      <div class="max-w-1/3 ml-10 mt-4">
+      <div class="flex flex-col justify-start items-start max-w-2/3 ml-10 mt-2">
         @include('components.partials.categorias-tags')
       </div>
     </div>
@@ -166,7 +172,7 @@
   <!-- ## Fin Sección Detalles, Categorías y Etiquetas ## ## -->
   <!-- Repeater con Adicionales-->
   <section aria-labelledby="related-heading" class="mt-10 border-t border-gray-200 px-4 py-16 sm:px-0">
-    <h2 id="related-heading" class="text-xl font-bold text-gray-900">Customers also bought</h2>
+    <h2 id="related-heading" class="text-xl font-bold text-gray-900">{{  __('Customers also bought') }}</h2>
     <div class="mt-8 grid grid-cols-2 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
       @foreach($randoms as $random)
         <div class="relative h-72 w-full overflow-hidden rounded-lg">

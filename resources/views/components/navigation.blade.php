@@ -1,4 +1,4 @@
-<nav class="bg-gray-800 z-10 relative">
+<nav class="sticky top-0 z-10 relative bg-gray-800">
   <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
     <div class="border-b border-gray-700">
       <div class="flex h-16 items-center justify-between px-4 sm:px-0">
@@ -35,11 +35,22 @@
           <div class="ml-4 flex items-center md:ml-6">
             @php
               $myc = json_decode(request()->cookie('cookie_favorites', '[]'), true);
+              $compras = json_decode(request()->cookie('cookie_compras', '[]'), true);
+              $comprados = count($compras);
               if($myc)
                  $countFavos = count($myc);
               else
                $countFavos=false;
             @endphp
+            <div id="div-comprados" class="relative mr-4">
+              <a href="{{route('cesta.cesta')}}">
+                <div
+                  class="absolute -left-2 -top-2 bg-white rounded-full w-4 h-4 flex  justify-center items-center">
+                  <p class="text-black text-xs contador">{{  $comprados }}</p>
+                </div>
+                <x-heroicon-o-shopping-cart class="size-6 shrink-0 text-gray-300"/>
+              </a>
+            </div>
             <div id="div-favorites" class="relative {{ $countFavos ? '': 'hidden' }}">
               <a href="{{route('favorites')}}">
                 <div
