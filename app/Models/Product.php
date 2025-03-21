@@ -99,7 +99,7 @@
         public function precios($descuento, $decimales = false): string
         {
             if ($descuento && $this->oferta) {
-                $precio_final = $this->price * (1 - $this->descuento / 100);
+                $precio_final = $this->price * (1 - ($this->descuento / 100));
             } else {
                 $precio_final = $this->price;
             }

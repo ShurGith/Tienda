@@ -43,10 +43,12 @@
                 return $this->eliminarCookieCompra();
             }
             
-            return response()->json([
+            /*return response()->json([
               'status' => 'success',
               'compras' => $compras
-            ])->cookie($this->cookie_name(), json_encode($compras), 525600);
+            ])->cookie($this->cookie_name(), json_encode($compras), 525600);*/
+            $cookie = cookie($this->cookie_name(), json_encode($compras), 525600);
+            return redirect()->back()->withCookie($cookie)->with('Producto', 'Producto a la cesta');
         }
         
         public function cookie_name(): string

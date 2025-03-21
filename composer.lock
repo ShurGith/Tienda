@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee4d5ba1abb8653d909040e83e22cb92",
+    "content-hash": "5aababe7e4fc426b469eaaf89edb2561",
     "packages": [
         {
             "name": "agencetwogether/hookshelper",
@@ -5502,6 +5502,81 @@
             "time": "2025-02-25T09:09:36+00:00"
         },
         {
+            "name": "scify/laravel-cookie-guard",
+            "version": "v4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/scify/laravel-cookie-guard.git",
+                "reference": "327e4009bbe835933d84dc4583ff561e47640ec8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/scify/laravel-cookie-guard/zipball/327e4009bbe835933d84dc4583ff561e47640ec8",
+                "reference": "327e4009bbe835933d84dc4583ff561e47640ec8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.1",
+                "laravel/pint": "^1.6",
+                "nunomaduro/collision": "^8.0",
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^3.7",
+                "pestphp/pest-plugin-laravel": "^v3.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^11.5",
+                "spatie/laravel-ray": "^1.39"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "LaravelCookiesConsent": "SciFY\\LaravelCookiesConsent\\Facades\\LaravelCookiesConsent"
+                    },
+                    "providers": [
+                        "SciFY\\LaravelCookiesConsent\\LaravelCookiesConsentServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SciFY\\LaravelCookiesConsent\\": "src",
+                    "SciFY\\LaravelCookiesConsent\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Isaris",
+                    "email": "paul@scify.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package that provides a Cookies consent floating window and publishes the Cookies for the different consent categories",
+            "homepage": "https://github.com/scify/laravel-cookie-guard",
+            "keywords": [
+                "cookies",
+                "gdpr",
+                "laravel",
+                "laravel cookies",
+                "laravel gdpr",
+                "laravel-cookie-guard",
+                "scify"
+            ],
+            "support": {
+                "issues": "https://github.com/scify/laravel-cookie-guard/issues",
+                "source": "https://github.com/scify/laravel-cookie-guard/tree/v4.0.1"
+            },
+            "time": "2025-03-14T08:05:08+00:00"
+        },
+        {
             "name": "scrivo/highlight.php",
             "version": "v9.18.1.10",
             "source": {
@@ -8500,81 +8575,6 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
-        },
-        {
-            "name": "whitecube/laravel-cookie-consent",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/whitecube/laravel-cookie-consent.git",
-                "reference": "b67e6e65f40d1e495a731f7ce27f6cfc0f0129b9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/laravel-cookie-consent/zipball/b67e6e65f40d1e495a731f7ce27f6cfc0f0129b9",
-                "reference": "b67e6e65f40d1e495a731f7ce27f6cfc0f0129b9",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^9|^10|^11|^12",
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^8.5|^9.0|^10.0",
-                "pestphp/pest": "^2.0|^3.7"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Cookies": "Whitecube\\LaravelCookieConsent\\Facades\\Cookies"
-                    },
-                    "providers": [
-                        "Whitecube\\LaravelCookieConsent\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Whitecube\\LaravelCookieConsent\\": "src/",
-                    "Whitecube\\LaravelCookieConsent\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Whitecube",
-                    "email": "hello@whitecube.be"
-                },
-                {
-                    "name": "Toon Van den Bos",
-                    "email": "toon@whitecube.be"
-                }
-            ],
-            "description": "Register, configure and ask for cookies consent in a EU-compliant way.",
-            "keywords": [
-                "compliant",
-                "cookies",
-                "eu",
-                "gdpr",
-                "laravel",
-                "whitecube"
-            ],
-            "support": {
-                "issues": "https://github.com/whitecube/laravel-cookie-consent/issues",
-                "source": "https://github.com/whitecube/laravel-cookie-consent/tree/v1.3.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/whitecube",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-03-17T10:59:56+00:00"
         }
     ],
     "packages-dev": [
@@ -13799,12 +13799,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.2.0"
 }
