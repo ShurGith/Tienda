@@ -14,29 +14,15 @@
         use HasFactory;
         
         protected $fillable = [
-          'name',
-          'description',
-          'images',
-          'features',
-          'price',
-          'active',
-          'oferta',
-          'descuento',
-          'units',
-          'stars',
-          'user_id',
-          'category_id',
-          'slug'
+          'name', 'description', 'images', 'features', 'price',
+          'active', 'oferta', 'descuento', 'units', 'stars',
+          'user_id', 'category_id', 'slug'
         ];
         
         protected $casts = [
-          'id' => 'integer',
-          'images' => 'array',
-          'active' => 'boolean',
-          'oferta' => 'boolean',
-          'user_id' => 'integer',
-          'category_id' => 'integer',
-          'stars' => 'integer'
+          'id' => 'integer', 'images' => 'array', 'active' => 'boolean',
+          'oferta' => 'boolean', 'user_id' => 'integer',
+          'category_id' => 'integer', 'stars' => 'integer'
         ];
         
         public function getImgPal()
@@ -113,15 +99,16 @@
         public function precios($descuento, $decimales = false): string
         {
             if ($descuento && $this->oferta) {
-                $precio_final = $this->price * ((100 - $this->descuento) / 100);
+                $precio_final = $this->price * (1 - $this->descuento / 100);
             } else {
                 $precio_final = $this->price;
             }
+            $salida = substr($this->formatoPrecio($precio_final, "'"), -2);
             if ($decimales) {
-                return substr($this->formatoPrecio($precio_final), -2);
+                return $salida;
             }
-            
-            return substr($this->formatoPrecio($precio_final), 0, strpos($this->formatoPrecio($precio_final), "'") + 1);
+            return substr($this->formatoPrecio($precio_final), 0,
+              strpos($this->formatoPrecio($precio_final), "'") + 1);
         }
         
         public function formatoPrecio($valor)
@@ -161,6 +148,5 @@
         {
             return ($this->oferta && $this->descuento) ?? false;
         }
-        
         
     }

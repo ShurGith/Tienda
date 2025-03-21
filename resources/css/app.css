@@ -103,6 +103,14 @@ select:focus[data-flux-control] {
     @apply text-xs font-medium leading-none whitespace-nowrap;
 }
 
+.link {
+    @apply text-orange-400 transition-colors duration-200 hover:text-orange-600 max-w-fit;
+}
+
+.decimales-precios {
+    @apply text-xs align-super;
+}
+
 @keyframes barra {
     0%, 100% {
         width: 0%;

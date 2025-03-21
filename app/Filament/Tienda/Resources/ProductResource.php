@@ -6,9 +6,13 @@
     use App\Filament\Tienda\Resources\ProductResource\RelationManagers;
     use App\Models\Product;
     use App\Models\Tag;
+    use Filament\Forms\Components\CheckboxList;
+    use Filament\Forms\Components\FileUpload;
     use Filament\Forms\Components\Repeater;
+    use Filament\Forms\Components\Select;
     use Filament\Forms\Components\Split;
     use Filament\Forms\Components\TextInput;
+    use Filament\Forms\Components\Toggle;
     use Filament\Forms\Form;
     use Filament\Forms\Get;
     use Filament\Infolists\Components\Tabs;
@@ -24,6 +28,7 @@
     use FilamentTiptapEditor\TiptapEditor;
     use Illuminate\Database\Eloquent\Builder;
     use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Str;
     
     class ProductResource extends Resource
     {
@@ -43,42 +48,47 @@
             return $form
               ->schema([
                 Split::make([
-                  Forms\Components\TextInput::make('name')
+                  TextInput::make('name')
                     ->translateLabel()
-                    ->required()
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state)))
+                    ->id('inputName')
                     ->maxLength(255),
-                  Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->label('Seller')
-                    ->translateLabel()
-                    ->required(),
-                  Forms\Components\TextInput::make('price')
+                  TextInput::make('slug')
+                    ->id('inputSlug')
+                    ->required()
+                    ->label('Slug'),
+                    /* Select::make('user_id')
+                       ->relationship('user', 'name')
+                       ->label('Seller')
+                       ->translateLabel()
+                       ->required(),*/
+                  TextInput::make('price')
                     ->numeric()
                     ->translateLabel()
                     ->prefix('€'),
                 ])->columnSpanFull(),
                 Split::make([
-                  Forms\Components\TextInput::make('units')
+                  TextInput::make('units')
                     ->numeric()
                     ->columnStart(3)
                     ->translateLabel(),
-                  Forms\Components\TextInput::make('descuento')
+                  TextInput::make('descuento')
                     ->numeric()
                     ->columnStart(4)
                     ->translateLabel()
                     ->visible(fn(Get $get): bool => $get('oferta')),
-                  Forms\Components\TextInput::make('stars')
+                  TextInput::make('stars')
                     ->integer()
                     ->step(5)
                     ->minValue(20)
                     ->maxValue(50)
                     ->columnSpan(1)
                     ->translateLabel(),
-                  Forms\Components\Toggle::make('oferta')
+                  Toggle::make('oferta')
                     ->translateLabel()
                     ->inline(false)
                     ->live(),
-                  Forms\Components\Toggle::make('active')
+                  Toggle::make('active')
                     ->translateLabel()
                     ->inline(false)
                     ->label('Activo'),
@@ -101,7 +111,7 @@
                   ->grid(2)
                   ->columnSpanFull(),
                 Split::make([
-                  Forms\Components\FileUpload::make('images')
+                  FileUpload::make('images')
                     ->directory('images/products')
                     ->image()
                     ->reorderable()
@@ -112,11 +122,11 @@
                     ->panelLayout('grid')
                     ->multiple(),
                   Split::make([
-                    Forms\Components\Select::make('category_id')
+                    Select::make('category_id')
                       ->translateLabel()->columnSpan(2)
                       ->relationship('category', 'name')
                       ->reactive(), // Esto hace que al cambiar la categoría, se actualicen otros campos dinámicamente
-                    Forms\Components\CheckboxList::make('tag_id')
+                    CheckboxList::make('tag_id')
                       ->translateLabel()
                       ->relationship('tags')
                       ->options(fn(callable $get) => Tag::where('category_id', $get('category_id'))
@@ -166,7 +176,7 @@
                   ->alignCenter()
                   ->label('Stock')
                   ->translateLabel(),
-                TextColumn::make('categories.name')
+                TextColumn::make('category.name')
                   ->size(TextColumn\TextColumnSize::ExtraSmall)
                   ->alignCenter()
                   ->label('Categorias')
@@ -181,12 +191,12 @@
                   ->alignCenter()
                   ->label('Etiquetas')
                   ->badge(),
-                TextColumn::make('user.name')
-                  ->size(TextColumn\TextColumnSize::ExtraSmall)
-                  ->label('Seller')
-                  ->translateLabel()
-                  ->icon('heroicon-m-user')
-                  ->toggleable(isToggledHiddenByDefault: false),
+                  /*    TextColumn::make('user.name')
+                        ->size(TextColumn\TextColumnSize::ExtraSmall)
+                        ->label('Seller')
+                        ->translateLabel()
+                        ->icon('heroicon-m-user')
+                        ->toggleable(isToggledHiddenByDefault: false),*/
                 TextColumn::make('created_at')
                   ->dateTime()
                   ->sortable()

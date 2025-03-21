@@ -1,3 +1,4 @@
+@php use phpDocumentor\Reflection\DocBlock\Tags\Author; @endphp
 <x-layouts.app :title="__('Dashboard')">
   <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
     <div class="grid auto-rows-min gap-4 md:grid-cols-3">
@@ -15,19 +16,39 @@
           
           <div class="flex justify-start ml-4 mt-2 space-x-2">
             <flux:divis.datos :texto="'Sales'" :icon="'wallet'" :count="auth()->user()->salesCount()"/>
-            <flux:divis.datos :texto="'Purchases'" :icon="'bookmark-square'" :count="auth()->user()->purchasesCount()"/>
+            <flux:divis.datos :texto="'Purchases'" :icon="'book-open'" :count="auth()->user()->purchasesCount()"/>
           </div>
         </div>
         <flux:divis.datos :little="false" :texto="'Blog Post'" :icon="'book-open'"
                           :count="auth()->user()->getCountProducts()"/>
       </div>
       <div
-        class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <x-placeholder-pattern class="absolute inset-0 size-full stroke-red-500/20 dark:stroke-neutral-100/20"/>
+        class="relative flex flex-col h-[320px] aspect-video rounded-xl border border-neutral-200 dark:border-neutral-700">
+        <div class="relative flex justify-center items-center space-x-2 text-zinc-400">
+          <flux:icon.book-open-text/>
+          <h3 class="text-xl">{{ __('User Posts') }}</h3>
+        </div>
+        <div class="flex flex-col w-full pl-6 overflow-y-scroll">
+          @foreach(auth()->user()->blog as $post)
+            <a class="link" href="{{ route('blog.show', $post->id) }}">{{ $post->title }}</a>
+          @endforeach
+        </div>
       </div>
       <div
-        class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <x-placeholder-pattern class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20"/>
+        class="relative relative flex flex-col h-[320px] aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+        <div class="relative flex justify-center items-center space-x-2 text-zinc-400">
+          <flux:icon.shopping-cart/>
+          <h3 class="text-xl">{{ __('User Products') }}</h3>
+        </div>
+        <div class=" flex flex-col w-full pl-6 overflow-y-scroll">
+          @foreach(auth()->user()->products as $product)
+            <a class="link"
+               href="{{ route('products.show', $product->id) }}">{{ $product->name }}<span
+                class="text-zinc-400 text-xs"> -  {{$product->precios($product->price)}}
+              <span class="decimales-precios !text-xs">{{ $product->precios($product->price, true) }}</span>&nbsp€
+            </a>
+          @endforeach
+        </div>
       </div>
     </div>
     <div
