@@ -1,5 +1,5 @@
 <!-- ## Utilizado en el index home -->
-<div class="-mx-px gap-2 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+<div class="-mx-px gap-2 grid grid-cols-1 sm:mx-0 sm:grid-cols-2 md:grid-cols-3">
   @foreach($posts as $post)
     
     <div

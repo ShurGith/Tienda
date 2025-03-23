@@ -24,12 +24,12 @@
               ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0))
               ->orderBy('created_at', 'DESC')
               ->get()
-              ->take(4);
+              ->take(6);
             
             $posts = Blog::with(['tags', 'category'])
               ->orderBy('created_at', 'DESC')
               ->get()
-              ->take(4);
+              ->take(8);
             
             return view('components.layouts.home', [
               'products' => $products,

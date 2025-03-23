@@ -1,5 +1,5 @@
 @props([ 'textFinal' => 'text-base', 'textIni' => 'text-sm'])
-<div class="flex flex-col gap-y-1 justify-center items-center gap-x-8">
+<div class="flex gap-y-1 justify-center items-center gap-x-8">
   @if($product->oferta)
     <h4
       class="{{ $textIni }} text-red-400 line-through text-sm font-medium text-gray-900">{{ $product->precios( false ) }}

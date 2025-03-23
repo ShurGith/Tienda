@@ -16,68 +16,38 @@
       </div>
     </div>
     <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
-      <table class="min-w-full divide-y divide-gray-300">
-        <thead>
-        <tr>
-          <th scope="col"
-              class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{  __('Image') }}</th>
-          <th scope="col"
-              class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">{{  __('Name') }}</th>
-          <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">
-            {{ __('Price') }}
-          </th>
-          <th scope="col"
-              class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">{{ __('Offer') }}
-          </th>
-          <th scope="col" class="relative text-right py-3.5 pl-3 pr-4 sm:pr-6">{{ __('Actions') }}
-            <span class="sr-only">{{ __('Actions') }}</span>
-          </th>
-        </tr>
-        </thead>
-        <tbody>
+      <div class="border border-gray-300 rounded-lg">
+        <div class="grid grid-cols-4 py-4 pl-2 border-b gray-300 w-full">
+          <div class="text-left text-sm font-semibold text-gray-700">{{  __('Image') }}</div>
+          <div class="text-left text-sm font-semibold text-gray-700">{{  __('Name') }}</div>
+          <div class="text-left text-sm font-semibold text-gray-700">{{  __('Price') }}</div>
+          <div class="text-center text-sm font-semibold text-gray-700">{{ __('Actions') }}</div>
+        </div>
         @foreach($products as $product)
-          <tr class="border-b">
-            <td class="relative py-4 pl-4 pr-3 text-sm sm:pl-6">
-              <div class="font-medium text-gray-900"><img class="max-w-14" src="{{ $product->getImgPal() }}"></div>
-            </td>
-            <td class=" relative py-4 pl-4 pr-3 text-sm sm:pl-6">
-              <div class="font-medium text-gray-900">{{ $product->name }}</div>
-            </td>
-            <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">
-              <div class="max-w-fit"><p> {{ $product->precios(false) }}<span
-                    class="pl-1 align-super">{{ $product->precios(false, true) }}</span> €</p>
-                @if($product->oferta)
-                  <p class="line-through  text-xs text-red-500">{{  $product->precios( true ) }}
-                    <span class="pl-1 align-super">{{  $product->precios( true, true ) }}</span> €</p>
-                @endif
-              </div>
-            </td>
-            <td class="hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell">
-              @if( $product->oferta)
-                <span
-                  class="inline-flex items-center gap-x-1.5 rounded-md bg-green-500/10 px-2 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-500/20"><svg
-                    class="size-1.5 fill-green-300" viewBox="0 0 6 6" aria-hidden="true">  <circle cx="3" cy="3" r="3"/> </svg>
-                 {{ $product->descuento .'% '. __('Discount') }}
-                </span>
-              @endif
-            </td>
-            <td class="flex items-center justify-end gap-2 py-3.5 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-              
+          <div class=" grid grid-cols-4 py-4 pl-2 border-b gray-300 w-full">
+            <div class=" ">
+              <img class="max-w-18" src="{{ $product->getImgPal() }}">
+            </div>
+            <div class="flex items-center font-medium text-gray-500 text-sm ">
+              {{ $product->name }}
+            </div>
+            <div class="flex flex-col items-start justify-center">
+              @include('components.partials.precios'  ,[ "textFinal" => "text-sm", "textIni"=> "text-xs"])
+              @include('components.partials.oferta')
+            </div>
+            <div
+              class="flex items-center justify-center gap-1">
               @if(!strpos(request()->cookie('cookie_compras'), $product->id))
-                <button data-tooltip-target="tooltip-dark" type="button"
-                        class="ms-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  Dark tooltip
-                </button>
-                
                 <div id="tooltip-dark" role="tooltip"
                      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-                  Tooltip content
+                  {{ __('Add to bag') }}
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
-                <div class="relative">
-                  <a href="{{ route('cesta.buyit', $product) }}" alt="{{ __('Add to bag') }}">
+                <div class="relative" data-tooltip-target="tooltip-dark">
+                  <a href="{{ route('cesta.buyit', $product) }}" alt="{{ __('Add to cart') }}">
                     <x-heroicon-o-shopping-cart class="h-6 w-6 text-amber-500"></x-heroicon-o-shopping-cart>
-                  </a></div>
+                  </a>
+                </div>
               @endif
               <a href="{{ route('products.show', $product) }}">
                 <x-heroicon-o-eye class="h-6 w-6 text-blue-500"></x-heroicon-o-eye>
@@ -90,13 +60,13 @@
                     class="btn cursor-pointer btn-delete text-red-500 h-6 w-6"></x-heroicon-o-trash>
                 </button>
               </form>
-            </td>
-          </tr>
+            </div>
+          </div>
         @endforeach
-        </tbody>
-      </table>
+      </div>
     </div>
   </div>
   <script src="{{asset('js/favorites.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
 </x-layouts.front>

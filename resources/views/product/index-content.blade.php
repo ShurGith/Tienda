@@ -1,4 +1,4 @@
-<div class="-mx-px gap-2 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+<div class="-mx-px gap-2 grid grid-cols-1 sm:mx-0 sm:grid-cols-2 md:grid-cols-3">
   @foreach($products as $product)
     <div
       class="relative bg-gray-100 group relative border-b border-r rounded-lg border-gray-200 shadow-md shadow-gray-800">
@@ -23,13 +23,15 @@
           </h3>
           <!-- ### PRECIOS ### -->
           @include('components.partials.precios')
-          <!-- ### UNIDADES ### -->
-          @include('components.partials.unidades')
-          <!-- Corazón Favoritos -->
-          @php
-            $enFavorites= strpos(request()->cookie('cookie_favorites'), $product->id);
-          @endphp
-          @include('components.partials.heart')
+          <div class="flex items-center gap-x-1" º>
+            <!-- ### UNIDADES ### -->
+            @include('components.partials.unidades')
+            <!-- Corazón Favoritos -->
+            @php
+              $enFavorites= strpos(request()->cookie('cookie_favorites'), $product->id);
+            @endphp
+            @include('components.partials.heart')
+          </div>
           <!-- ## ESTRELLAS ## -->
           @include('components.partials.stars')
         </div>

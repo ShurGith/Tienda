@@ -49,7 +49,7 @@
                 $products = Product::with(['tags', 'category'])
                   ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
                   ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0))
-                  ->paginate(50);
+                  ->paginate(48);
             }
             
             return view('product.index', [
