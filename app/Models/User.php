@@ -55,6 +55,7 @@
             return $this->hasMany(Order::class, 'seller_id');
         }
         
+        
         public function salesCount(): int
         {
             return Order::where('seller_id', $this->id)->count();

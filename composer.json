@@ -12,6 +12,7 @@
         "bezhansalleh/filament-panel-switch": "^1.0",
         "filament/filament": "^3.2",
         "filament/infolists": "^3.2",
+        "filament/widgets": "^3.3",
         "guava/filament-icon-picker": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",

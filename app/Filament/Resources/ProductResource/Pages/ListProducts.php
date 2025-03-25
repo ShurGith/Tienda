@@ -3,12 +3,20 @@
     namespace App\Filament\Resources\ProductResource\Pages;
     
     use App\Filament\Resources\ProductResource;
+    use App\Filament\Resources\ProductResource\Widgets\CustomerOverview;
     use Filament\Actions;
     use Filament\Resources\Pages\ListRecords;
     
     class ListProducts extends ListRecords
     {
         protected static string $resource = ProductResource::class;
+        
+        public static function getWidgets(): array
+        {
+            return [
+              CustomerOverview::class,
+            ];
+        }
         
         protected function getHeaderActions(): array
         {
@@ -17,4 +25,5 @@
                 ->label('New Product')->translateLabel(),
             ];
         }
+        //getHeaderWidgets()
     }

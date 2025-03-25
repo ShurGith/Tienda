@@ -25,6 +25,37 @@
           'category_id' => 'integer', 'stars' => 'integer'
         ];
         
+        public static function contarVendedores()
+        {
+            return self::distinct('user_id')->count('user_id');
+        }
+        
+        public static function valorTotalProductos()
+        {
+            $total = self::sum('price');
+            return number_format($total / 100, 2, "'", ".")." €";
+        }
+        
+        public function precios($descuento, $decimales = false): string
+        {
+            if ($descuento && $this->oferta) {
+                $precio_final = $this->price * (1 - ($this->descuento / 100));
+            } else {
+                $precio_final = $this->price;
+            }
+            $salida = substr($this->formatoPrecio($precio_final, "'"), -2);
+            if ($decimales) {
+                return $salida;
+            }
+            return substr($this->formatoPrecio($precio_final), 0,
+              strpos($this->formatoPrecio($precio_final), "'") + 1);
+        }
+        
+        public function formatoPrecio($valor)
+        {
+            return number_format($valor / 100, 2, "'", ".");
+        }
+        
         public function getImgPal()
         {
             if (isset($this->images)) {
@@ -65,7 +96,6 @@
             return $this->hasMany(Featuretitle::class);
         }
         
-        
         public function featuresproducts(): HasMany
         {
             return $this->hasMany(Featuretitle::class);
@@ -94,26 +124,6 @@
         public function seller(): BelongsTo
         {
             return $this->belongsTo(Order::class);
-        }
-        
-        public function precios($descuento, $decimales = false): string
-        {
-            if ($descuento && $this->oferta) {
-                $precio_final = $this->price * (1 - ($this->descuento / 100));
-            } else {
-                $precio_final = $this->price;
-            }
-            $salida = substr($this->formatoPrecio($precio_final, "'"), -2);
-            if ($decimales) {
-                return $salida;
-            }
-            return substr($this->formatoPrecio($precio_final), 0,
-              strpos($this->formatoPrecio($precio_final), "'") + 1);
-        }
-        
-        public function formatoPrecio($valor)
-        {
-            return number_format($valor / 100, 2, "'", ".");
         }
         
         public function getStars()

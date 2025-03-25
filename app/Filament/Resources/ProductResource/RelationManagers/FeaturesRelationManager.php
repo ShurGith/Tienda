@@ -34,6 +34,7 @@
               ])
               ->headerActions([
                 Tables\Actions\CreateAction::make(),
+                Tables\Actions\EditAction::make(),
               ])
               ->actions([
                 Tables\Actions\EditAction::make(),
