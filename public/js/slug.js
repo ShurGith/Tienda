@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-	
-	const entrada = document.getElementById('inputName')
-	const recibe = document.getElementById('inputSlug')
+	const entrada = document.getElementById('inputName');
+	const recibe = document.getElementById('inputSlug');
 	if (entrada == null) return
 	
 	function string_to_slug(str) {
@@ -26,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			.replace(/-+/g, '-');
 		
 		// Asignar el slug generado al campo de entrada correspondiente
-		return str
+		return str;
 	}
 	
 	entrada.addEventListener('input', () => {
-		recibe.value = string_to_slug(entrada.value)
-	})
-})
+		recibe.value = string_to_slug(entrada.value);
+	});
+});

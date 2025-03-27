@@ -32,7 +32,6 @@
     use Illuminate\Support\Str;
     
     FilamentAsset::register([
-        //Js::make('example-local-script', asset('js/slug.js')),
       Js::make('slug', asset('/js/slug.js')),
     ]);
     

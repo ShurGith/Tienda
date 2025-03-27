@@ -8,10 +8,16 @@
     use Filament\Forms;
     use Filament\Forms\Form;
     use Filament\Resources\Resource;
+    use Filament\Support\Assets\Js;
+    use Filament\Support\Facades\FilamentAsset;
     use Filament\Tables;
     use Filament\Tables\Table;
     use Guava\FilamentIconPicker\Forms\IconPicker;
     use Guava\FilamentIconPicker\Tables\IconColumn;
+    
+    FilamentAsset::register([
+      Js::make('slug', asset('/js/slug.js')),
+    ]);
     
     class CategoryResource extends Resource
     {
@@ -29,7 +35,14 @@
               ->schema([
                 Forms\Components\Split::make([
                   Forms\Components\TextInput::make('name')
+                    ->id('inputName')
                     ->required(),
+                  Forms\Components\TextInput::make('slug')
+                    ->id('inputSlug')
+                    ->required()
+                    ->label('Slug'),
+                ])->columnSpanFull(),
+                Forms\Components\Split::make([
                   Forms\Components\ColorPicker::make('color'),
                   Forms\Components\ColorPicker::make('bgcolor'),
                   Forms\Components\ToggleButtons::make('icon_active')
@@ -84,8 +97,8 @@
               ])
               ->actions([
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\EditAction::make()
-                  ->slideOver(),
+                Tables\Actions\EditAction::make(),
+                  // ->slideOver(),
               ])
               ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -106,7 +119,7 @@
             return [
               'index' => Pages\ListCategories::route('/'),
               'create' => Pages\CreateCategory::route('/create'),
-                //'edit' => Pages\EditCategory::route('/{record}/edit'),
+              'edit' => Pages\EditCategory::route('/{record}/edit'),
             ];
         }
     }

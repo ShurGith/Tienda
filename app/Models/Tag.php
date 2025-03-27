@@ -16,6 +16,7 @@
         
         protected $fillable = [
           'name',
+          'slug',
           'bgcolor',
           'color',
           'image',

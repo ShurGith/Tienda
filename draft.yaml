@@ -30,6 +30,7 @@ models:
 
   Category:
     name: string index.blade.php
+    slug: string unique nullable
     bgcolor: text nullable
     color: string nullable
     image: text nullable
@@ -41,6 +42,7 @@ models:
 
   Tag:
     name: string index.blade.php
+    slug: string unique nullable
     bgcolor: text nullable
     color: string nullable
     image: text nullable
