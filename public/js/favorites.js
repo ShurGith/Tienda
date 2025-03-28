@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const quitaFlash = (pasado) => {
 		pasado.classList.remove('-translate-x-full');
 		pasado.querySelector('.flashBarra').classList.remove('animateBarra');
-		
 	};
 	
 	const muestraFlash = (pasado) => {
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			quitaFlash(pasado);
 		}, 4000);
 	};
-	
 	
 	crearNuevo = function (pasado) {
 		avisoId++;
@@ -46,18 +44,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		}, 4200);
 	};
 	
-	
 	const containsString = (obj, str) => {
 		return Object.values(obj).some(value => typeof value === 'string' && value.includes(str));
 	};
-	
 	
 	const toggleA = (elemento) => {
 		elemento.classList.toggle('text-green-500');
 		const tipText = elemento.querySelectorAll('[data-tipo=tip-text]');
 		for (let tip of tipText) tip.classList.toggle('hidden');
 	};
-	
 	
 	if (bannerDel) {
 		setTimeout(function () {
@@ -100,5 +95,5 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 				});
 		});
-	})
+	});
 });

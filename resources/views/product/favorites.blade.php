@@ -37,7 +37,7 @@
             </div>
             <div
               class="flex items-center justify-center gap-1">
-              @if(!strpos(request()->cookie('cookie_compras'), $product->id))
+              @if(!strpos(request()->cookie('cookie_compras'), $product->slug))
                 <div id="tooltip-dark" role="tooltip"
                      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
                   {{ __('Add to bag') }}

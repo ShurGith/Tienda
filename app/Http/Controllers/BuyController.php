@@ -36,7 +36,6 @@
                   'slug' => $slug,
                 ];
                 
-                
                 if (!in_array($slug, $compras) and is_numeric($productId)) {
                     $compras[] = $producto;
                     
