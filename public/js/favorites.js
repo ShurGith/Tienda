@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const btnsFav = document.querySelectorAll('[data-tipo=heart-button]'),
 		btnsTotals = document.querySelectorAll('[data-role=btnTotal]'),
 		contadorFavs = document.getElementById("div-favorites"), //btnFlash = flashVisible.querySelector('button'),
-		contador = document.querySelector(".contador"), contenedor = document.getElementById("flashVisible"),
+		contador = document.querySelector(".contador-fav"), contenedor = document.getElementById("flashVisible"),
 		bannerAdd = document.querySelector("#fav-show-add"), bannerRem = document.querySelector("#fav-show-remove"),
 		bannerDel = document.querySelector("#flashdelete");
 	
@@ -50,14 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const containsString = (obj, str) => {
 		return Object.values(obj).some(value => typeof value === 'string' && value.includes(str));
 	};
-	
-	/*
-	if (btnFlash !== null) {
-		btnFlash.addEventListener('click', () => {
-			quitaFlash();
-		});
-	}
-	*/
 	
 	
 	const toggleA = (elemento) => {

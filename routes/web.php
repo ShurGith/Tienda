@@ -38,9 +38,13 @@
     
     Route::get('/cesta/{product}', [BuyController::class, 'cookie'])->name('cesta.buyit');
     Route::post('/cesta/{product}', [BuyController::class, 'cookie'])->name('cesta.cookie');
+    Route::post('/actualizar-cantidad', [BuyController::class, 'actualizarCantidad']);
     Route::get('/cesta', [BuyController::class, 'cesta'])->name('cesta.cesta');
     
     Route::resource('products', ProductController::class);
+    Route::get('/post/{slug}', [ProductController::class, 'show'])->name('post.show');
+    
+    
     Route::get('/lang/{lang}', [LanguageController::class, 'switch'])->name('lang');
     
     Route::resource('blog', BlogController::class);

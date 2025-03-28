@@ -8,6 +8,9 @@
       <div class="text-center text-sm font-semibold text-gray-900 "> {{ __('Total') }}</div>
       <div class="text-center text-sm font-semibold text-gray-900">{{ __('Actions') }}</div>
     </div>
+    @php
+      $i = 0;
+    @endphp
     @foreach($products as $product)
       <div class=" grid grid-cols-6 py-4 pl-2 border-b gray-300 w-full">
         <div class=" ">
@@ -20,15 +23,29 @@
           @include('components.partials.precios'  ,[ "textFinal" => "text-sm", "textIni"=> "text-xs"])
           @include('components.partials.oferta')
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center justify-center gap-2">
+          @php
+            if(strpos(request()->cookie('cookie_compras'), $product->slug)){
+            $valor = $cantidades[$i];
+             $i++;
+                }
+          @endphp
+          <input type="number" name="cantidad" value="{{ $valor }}" min="1" data-id="{{ $product->id }}"
+                 class="max-w-1/4 rounded-md border-2 block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
         </div>
         <div class="flex items-center">
+          @if($product->getHayOferta())
+            <input type="hidden" name="precio" value="{{ $product->precioOferta() }}">
+          @else
+            <input type="hidden" name="precio" value="{{ $product->price }}">
+          @endif
+          <p class="total"></p>
         </div>
         <div class="flex items-center justify-center gap-2">
           <a href="{{ route('products.show', $product) }}">
             <x-heroicon-o-eye class="h-6 w-6 text-blue-500"></x-heroicon-o-eye>
           </a>
-          <form method="post" action="{{route('cesta.cookie',$product)}}">
+          <form method="post" action="{{route('cesta.cookie',$product->id)}}">
             @csrf
             <input type="hidden" name="unico" value="1">
             <button data-role="btnTotal" type="submit">
@@ -41,4 +58,5 @@
   </div>
   </div>
   <script src="{{asset('js/favorites.js')}}"></script>
+  <script src="{{asset('js/calculo.js')}}"></script>
 </x-layouts.front>

@@ -39,7 +39,7 @@
         public function precios($descuento, $decimales = false): string
         {
             if ($descuento && $this->oferta) {
-                $precio_final = $this->price * (1 - ($this->descuento / 100));
+                $precio_final = $this->precioOferta();
             } else {
                 $precio_final = $this->price;
             }
@@ -49,6 +49,11 @@
             }
             return substr($this->formatoPrecio($precio_final), 0,
               strpos($this->formatoPrecio($precio_final), "'") + 1);
+        }
+        
+        public function precioOferta()
+        {
+            return $this->price * (1 - ($this->descuento / 100));
         }
         
         public function formatoPrecio($valor)
@@ -159,4 +164,8 @@
             return ($this->oferta && $this->descuento) ?? false;
         }
         
+        public function getRouteKeyName()
+        {
+            return 'slug';
+        }
     }

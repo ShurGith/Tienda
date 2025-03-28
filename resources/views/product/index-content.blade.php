@@ -19,7 +19,7 @@
         <div class="flex flex-col items-center w-full justify-center gap-y-6 mb-4">
           <!-- Name -->
           <h3 class="z-12 text-xl font-bold text-gray-500 mt-2" data-role="name-product">
-            <a href="{{ route('products.show', $product) }}">{{ $product->name }} </a>
+            <a href="{{ route('products.show',($product->slug)?? $product->id) }}">{{ $product->name }} </a>
           </h3>
           <!-- ### PRECIOS ### -->
           @include('components.partials.precios')

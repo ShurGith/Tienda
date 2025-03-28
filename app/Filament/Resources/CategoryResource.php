@@ -14,6 +14,7 @@
     use Filament\Tables\Table;
     use Guava\FilamentIconPicker\Forms\IconPicker;
     use Guava\FilamentIconPicker\Tables\IconColumn;
+    use Illuminate\Support\Str;
     
     FilamentAsset::register([
       Js::make('slug', asset('/js/slug.js')),
@@ -35,6 +36,7 @@
               ->schema([
                 Forms\Components\Split::make([
                   Forms\Components\TextInput::make('name')
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state)))
                     ->id('inputName')
                     ->required(),
                   Forms\Components\TextInput::make('slug')
@@ -67,9 +69,10 @@
             return $table
               ->columns([
                 Tables\Columns\TextColumn::make('name')
-                  ->url(fn(Category $record): string => route('home', ['category' => $record]))
-                  ->openUrlInNewTab()
+                  //   ->url(fn(Category $record): string => route('home', ['category' => $record]))
+                  //   ->openUrlInNewTab()
                   ->sortable(),
+                Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\ColorColumn::make('color')
                   ->copyable(),
                 Tables\Columns\ColorColumn::make('bgcolor')
@@ -97,8 +100,8 @@
               ])
               ->actions([
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\EditAction::make(),
-                  // ->slideOver(),
+                Tables\Actions\EditAction::make()
+                  //->slideOver(),
               ])
               ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

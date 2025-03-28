@@ -143,7 +143,7 @@
             <div class="text-base/5 font-medium text-white">{{ auth()->user()->name}}</div>
             <div class="text-sm font-medium text-gray-400">{{ auth()->user()->email }}</div>
           </div>
-          <div class="flex justify-end items-center">
+          <div class="flex justify-end items-center z-index-200">
             @include('components.contadores-menu')
             <button type="button"
                     class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
@@ -174,6 +174,13 @@
           @endguest
         </div>
       </div>
-    @endauth
-  </div>
+  @endauth
 </nav>
+<div id="flashVisible"
+     class="fixed w-max top-0 right-0 flex items-end flex-col gap-1 justify-center z-100">
+  @include('components.layouts.flash-messages')
+  @if (session()->has('eliminado'))
+    <x-layouts.flash-eliminado :message="$message"/>
+  @endif
+  <x-layouts.flash-unic :message="$message"/>
+</div>

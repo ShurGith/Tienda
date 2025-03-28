@@ -44,7 +44,7 @@
                   <div class="tooltip-arrow" data-popper-arrow></div>
                 </div>
                 <div class="relative" data-tooltip-target="tooltip-dark">
-                  <a href="{{ route('cesta.buyit', $product) }}" alt="{{ __('Add to cart') }}">
+                  <a href="{{ route('cesta.buyit', $product->id) }}" alt="{{ __('Add to cart') }}">
                     <x-heroicon-o-shopping-cart class="h-6 w-6 text-amber-500"></x-heroicon-o-shopping-cart>
                   </a>
                 </div>
@@ -52,7 +52,7 @@
               <a href="{{ route('products.show', $product) }}">
                 <x-heroicon-o-eye class="h-6 w-6 text-blue-500"></x-heroicon-o-eye>
               </a>
-              <form method="post" action="{{route('favorites.toggle',$product)}}">
+              <form method="post" action="{{route('favorites.toggle',$product->id)}}">
                 @csrf
                 <input type="hidden" name="unico" value="1">
                 <button data-role="btnTotal" type="submit">

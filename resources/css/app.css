@@ -124,3 +124,7 @@ select:focus[data-flux-control] {
     }
 }
 
+.custom-widget {
+    @apply bg-blue-500 text-white shadow-lg rounded-xl;
+}
+

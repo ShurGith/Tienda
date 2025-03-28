@@ -14,7 +14,6 @@
             $favorites = json_decode($request->cookie($this->cookie_name(), '[]'), true);
             $productName = Product::findOrFail($productId)->name;
             
-            //dd($request);
             
             if (!in_array($productId, $favorites) and is_numeric($productId)) {
                 $favorites[] = $productId;

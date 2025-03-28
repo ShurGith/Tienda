@@ -22,24 +22,26 @@
             $onlyRegisterView = Generaloptions::where('name', 'only_register_view')->pluck('value')[0];
             
             if ($request->category) {
-                $laid = $request->category;
-                $elNombre = Category::where('id', $laid)->pluck('name')[0];
+                $elSlug = $request->category;
+                $elNombre = Category::where('slug', $elSlug)->pluck('name')[0];
                 $titulo = " Productos de la categoría \"$elNombre\"";
                 $products = Product::with(['tags', 'category'])
                   ->whereHas('category',
-                    function ($query) use ($hideNoStock, $hideNoActives, $laid) {
-                        $query->where('category_id', $laid)
+                    function ($query) use ($hideNoStock, $hideNoActives, $elSlug) {
+                        $query->where('slug', $elSlug)
                           ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
                           ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0));
                     })->paginate(12);
                 
             } elseif ($request->tag) {
-                $laid = $request->tag;
-                $elNombre = Tag::where('id', $laid)->pluck('name')[0];
+                // $elId = $request->tag;
+                $elSlug = $request->tag;
+                $elNombre = Tag::where('slug', $elSlug)->pluck('name')[0];
+                $elId = Tag::where('slug', $elSlug)->pluck('id')[0];
                 $titulo = "Productos de la etiqueta \"$elNombre \"";
                 $products = Product::with(['tags', 'category'])
-                  ->whereHas('tags', function ($query) use ($hideNoStock, $hideNoActives, $laid) {
-                      $query->where('tag_id', $laid)
+                  ->whereHas('tags', function ($query) use ($hideNoStock, $hideNoActives, $elId) {
+                      $query->where('tag_id', $elId)
                         ->when($hideNoActives == 1, fn($query) => $query->where('active', true))
                         ->when($hideNoStock == 1, fn($query) => $query->where('units', '>', 0));
                   })->paginate(12);

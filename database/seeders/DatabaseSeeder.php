@@ -2,14 +2,8 @@
     
     namespace Database\Seeders;
     
-    use App\Models\Blog;
-    use App\Models\Category;
-    use App\Models\Generaloptions;
-    use App\Models\Product;
     use App\Models\Tag;
-    use App\Models\User;
     use Illuminate\Database\Seeder;
-    use Illuminate\Support\Facades\Hash;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
     
@@ -20,7 +14,7 @@
          */
         public function run(): void
         {
-            
+            /*
             User::factory()->create([
               'name' => 'Juan Jota',
               'email' => 'esnola@gmail.com',
@@ -77,6 +71,36 @@
                   'active' => rand(0, 1),
                 
                 ]);
+            }*/
+            function generateSlug($string)
+            {
+                $string = trim($string);
+                // Convertir a minúsculas
+                $string = mb_strtolower($string, 'UTF-8');
+                
+                // Reemplazar caracteres especiales con su equivalente sin tilde
+                $string = preg_replace('/[áàäâ]/u', 'a', $string);
+                $string = preg_replace('/[éèëê]/u', 'e', $string);
+                $string = preg_replace('/[íìïî]/u', 'i', $string);
+                $string = preg_replace('/[óòöô]/u', 'o', $string);
+                $string = preg_replace('/[úùüû]/u', 'u', $string);
+                $string = preg_replace('/[ñ]/u', 'n', $string);
+                
+                // Reemplazar cualquier carácter no alfanumérico por guiones
+                $string = preg_replace('/[^a-z0-9]+/u', '-', $string);
+                
+                // Eliminar guiones al inicio y final
+                $string = trim($string, '-');
+                
+                return $string;
             }
+            
+            $products = Tag::whereNull('slug')->orWhere('slug', '')->get();
+            
+            foreach ($products as $product) {
+                $product->slug = generateSlug($product->name);
+                $product->save();
+            }
+            
         }
     }

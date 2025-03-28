@@ -37,4 +37,9 @@
         {
             return $this->hasMany(Tag::class);
         }
+        
+        public function getRouteKeyName()
+        {
+            return 'slug';
+        }
     }

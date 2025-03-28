@@ -1,6 +1,6 @@
 @props([
     'enFavorites' => strpos(request()->cookie('cookie_favorites'), $product->id),
-    'enCompras' => strpos(request()->cookie('cookie_compras'), $product->id),
+    'enCompras' => strpos(request()->cookie('cookie_compras'), $product->slug),
   ])
 <style>
     [data-role="tab-info"] {
@@ -112,7 +112,7 @@
           <div class="flex items-center gap-x-4">
             <!-- Botón Add to Bag -->
             @if(!$enCompras)
-              <a href="{{ route('cesta.buyit', $product) }}"
+              <a href="{{ route('cesta.buyit', $product->id) }}"
                  class="py-2 px-4 bg-gray-500 hover:bg-gray-600 transition-all rounded-md text-white duration-200">
                 {{__('Add to bag')}}
               </a>
@@ -198,7 +198,7 @@
             <p class="relative text-lg font-semibold text-white">{{$random->precios($random->oferta)}}
               <span class="align-super text-base">{{$random->precios($random->oferta, true)}}</span> €</p>
           </div>
-          <a href="{{ route('products.show', $random) }}"
+          <a href="{{ route('products.show', ($random->slug)?? $random->id) }}"
              class="absolute left-2 bottom-4 flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200">Ver</a>
         </div>
       @endforeach

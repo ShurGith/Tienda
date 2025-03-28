@@ -14,7 +14,8 @@
         protected function getStats(): array
         {
             return [
-              Stat::make(__('Products on list'), Product::query()->count()),
+              Stat::make(__('Products on list'), Product::query()->count())
+                ->extraAttributes(['class' => 'custom-widget']),
                 //->description('32k increase')
                 //   ->descriptionIcon('heroicon-m-arrow-trending-up'),
               Stat::make(__('Sellers'), Product::contarVendedores()),
@@ -23,6 +24,7 @@
               Stat::make('Valor Total Productos', Product::valorTotalProductos()),
                 //  ->description('3% increase')
                 //  ->descriptionIcon('heroicon-m-arrow-trending-up'),
+            
             ];
         }
     }
