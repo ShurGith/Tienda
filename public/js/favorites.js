@@ -6,18 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		bannerAdd = document.querySelector("#fav-show-add"), bannerRem = document.querySelector("#fav-show-remove"),
 		bannerDel = document.querySelector("#flashdelete");
 	
+	let alldelete = false;
 	let avisoId = 0;
 	const colaAvisos = [];
 	
 	const quitaFlash = (pasado) => {
-		pasado.classList.remove('translate-none');
+		pasado.classList.remove('-translate-x-full');
 		pasado.querySelector('.flashBarra').classList.remove('animateBarra');
+		
 	};
 	
 	const muestraFlash = (pasado) => {
-		pasado.classList.add('translate-x-full');
+		//pasado.classList.add('-translate-x-[200%]');
 		pasado.querySelector('.flashBarra').classList.add('animateBarra');
-		
 		setTimeout(function () {
 			quitaFlash(pasado);
 		}, 4000);
@@ -26,17 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	crearNuevo = function (pasado) {
 		avisoId++;
-		nuevoDiv = pasado.cloneNode(true)
-		nuevoDiv.dataset.id = avisoId
+		let nuevoDiv = pasado.cloneNode(true);
+		nuevoDiv.dataset.id = avisoId;
 		contenedor.appendChild(nuevoDiv);
 		colaAvisos.push(nuevoDiv);
 		setTimeout(() => {
-			nuevoDiv.classList.add('translate-none')
-		}, 0)
+			nuevoDiv.classList.add('-translate-x-full');
+		}, 0);
 		nuevoDiv.querySelector('.flashBarra').classList.add('animateBarra');
 		setTimeout(() => {
-			quitaFlash(colaAvisos[0])
-		}, 4000)
+			quitaFlash(colaAvisos[0]);
+		}, 4000);
 		setTimeout(() => {
 			const primerAviso = colaAvisos.shift();
 			if (nuevoDiv.parentNode) {
@@ -46,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 	
 	
-	alldelete = false;
 	const containsString = (obj, str) => {
 		return Object.values(obj).some(value => typeof value === 'string' && value.includes(str));
 	};

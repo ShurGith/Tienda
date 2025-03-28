@@ -17,14 +17,14 @@
     </div>
     <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
       <div class="border border-gray-300 rounded-lg">
-        <div class="grid grid-cols-4 py-4 pl-2 border-b gray-300 w-full">
+        <div class="grid grid-cols-4 py-4 pl-2 border-b border-gray-300 w-full">
           <div class="text-left text-sm font-semibold text-gray-700">{{  __('Image') }}</div>
           <div class="text-left text-sm font-semibold text-gray-700">{{  __('Name') }}</div>
           <div class="text-left text-sm font-semibold text-gray-700">{{  __('Price') }}</div>
           <div class="text-center text-sm font-semibold text-gray-700">{{ __('Actions') }}</div>
         </div>
         @foreach($products as $product)
-          <div class=" grid grid-cols-4 py-4 pl-2 border-b gray-300 w-full">
+          <div class=" grid grid-cols-4 py-4 pl-2 not-last:border-b border-gray-300  w-full">
             <div class=" ">
               <img class="max-w-18" src="{{ $product->getImgPal() }}">
             </div>

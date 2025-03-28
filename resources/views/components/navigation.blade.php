@@ -177,7 +177,7 @@
   @endauth
 </nav>
 <div id="flashVisible"
-     class="fixed w-max top-0 right-0 flex items-end flex-col gap-1 justify-center z-100">
+     class="fixed top-0 right-0 flex items-end translate-x-full flex-col gap-1 justify-center border-2 border-white z-2">
   @include('components.layouts.flash-messages')
   @if (session()->has('eliminado'))
     <x-layouts.flash-eliminado :message="$message"/>

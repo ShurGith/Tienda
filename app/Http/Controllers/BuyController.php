@@ -45,8 +45,16 @@
                 }
             } else {
                 if ($request->unico && count($compras) > 0) {
-                    Cookie::queue($this->cookie_name(), json_encode($compras), 525600);
+                    $carrito = json_decode(Cookie::get($this->cookie_name()), true) ?? [];
+                    // Cookie::queue($this->cookie_name(), json_encode($compras), 525600);
                     
+                    // Eliminar un elemento específico (por ejemplo, con índice o clave 'producto_id')
+                    $productoIdAEliminar = $productId;
+                    $carrito = array_filter($carrito, function ($producto) use ($productoIdAEliminar) {
+                        return $producto['id'] !== $productoIdAEliminar;
+                    });
+                    
+                    Cookie::queue($this->cookie_name(), json_encode($carrito), 525600);
                     return back()->with('eliminado',
                       '<span class="text-xl font-bold">'.$productName.'</span>  '.__('has been removed from your shopping cart'));
                 }
