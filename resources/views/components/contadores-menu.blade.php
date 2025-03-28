@@ -7,7 +7,7 @@
   else
    $countFavos=false;
 @endphp
-<div id="div-comprados" class="relative mr-4">
+<div id="div-comprados" class="relative mr-4 {{ !$comprados ? 'hidden' : '' }}">
   <a href="{{route('cesta.cesta')}}">
     <div
       class="absolute -left-2 -top-2 bg-white rounded-full w-4 h-4 flex  justify-center items-center">
@@ -16,7 +16,7 @@
     <x-heroicon-o-shopping-cart class="size-6 shrink-0 text-gray-300"/>
   </a>
 </div>
-<div id="div-favorites" class="relative">
+<div id="div-favorites" class="relative {{ !$countFavos ? 'hidden' : '' }}">
   <a href="{{route('favorites')}}">
     <div
       class="absolute -left-2 -top-2 bg-white rounded-full w-4 h-4 flex  justify-center items-center">

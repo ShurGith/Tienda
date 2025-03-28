@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				.then(response => response.json())
 				.then(data => {
 					if (containsString(data.favorites, productId)) {
+						//	if (contador === null) location.reload()
 						contador.innerText = (+contador.innerText) + 1;
 						bannerAdd.querySelector('[data-role=info]').innerText = this.dataset.nameproduct;
 						crearNuevo(bannerAdd);
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					}
 					if (contador.innerText === "0") {
 						contadorFavs.classList.add('hidden');
+						window.location.href = "/";
 					} else {
 						contadorFavs.classList.remove('hidden');
 					}

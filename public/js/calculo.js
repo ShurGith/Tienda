@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 	}
 	
-	
 	cantidades.forEach((cantidad, index) => {
 		cantidad.addEventListener('click', function () {
 			actualizaPrecio(index);

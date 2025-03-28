@@ -57,6 +57,7 @@ models:
     buyer_id: id foreign:users
     seller_id: id foreign:users
     product_id: id foreign:products
+    quantity: integer
     relationships:
       hasMany: Product
 

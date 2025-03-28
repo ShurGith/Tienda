@@ -15,6 +15,7 @@
           'buyer_id',
           'seller_id',
           'product_id',
+          'quantity'
         ];
         
         protected $casts = [
@@ -22,6 +23,7 @@
           'buyer_id' => 'integer',
           'seller_id' => 'integer',
           'product_id' => 'integer',
+          'quantity' => 'integer'
         ];
         
         public function products(): HasMany
