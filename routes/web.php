@@ -11,10 +11,10 @@
     use App\Livewire\Settings\Profile;
     use Illuminate\Support\Facades\Route;
     
-    Route::get('/', function () {
-        return view('layouts/page', ["metaTitle" => "Inicio"]);
+ /*  Route::get('/', function () {
+        return view('components/layouts/home', ["metaTitle" => "Inicio"]);
     })->name('home');
-    
+    */
     Route::view('dashboard', 'dashboard')
       ->middleware(['auth', 'verified'])
       ->name('dashboard');
@@ -33,7 +33,7 @@
     
     require __DIR__.'/auth.php';
     
-    Route::resource('products', App\Http\Controllers\ProductController::class);
+    Route::resource('products',ProductController::class);
     Route::get('/', [HomeController::class, 'home'])->name('home');
     
     Route::get('/cesta/{product}', [BuyController::class, 'cookie'])->name('cesta.buyit');
