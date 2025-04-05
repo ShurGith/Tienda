@@ -42,6 +42,10 @@
             
             return $panel
               ->default()
+              ->brandName(__('Admin Panel'))
+              ->favicon(asset('favicon-16x16.png'))
+              ->brandLogo(asset('favicon-32x32.png'))
+              ->brandLogoHeight('60px')
               ->id('admin')
               ->path('admin')
               ->login()
