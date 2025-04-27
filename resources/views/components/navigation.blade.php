@@ -4,9 +4,11 @@
       <div class="flex h-16 items-center justify-between px-4 sm:px-0">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img class="size-12"
-                 src="{{asset('storage/images/page/logo.png')}}"
-                 alt="{{ config('app.name') }}"/>
+            <a href="{{ route('home') }}">
+              <img class="size-12"
+                   src="{{asset('storage/images/page/logo.png')}}"
+                   alt="{{ config('app.name') }}"/>
+            </a>
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">

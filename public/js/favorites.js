@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 	const btnsFav = document.querySelectorAll('[data-tipo=heart-button]'),
 		btnsTotals = document.querySelectorAll('[data-role=btnTotal]'),
-		contadorFavs = document.getElementById("div-favorites"), //btnFlash = flashVisible.querySelector('button'),
-		contador = document.querySelector(".contador-fav"), contenedor = document.getElementById("flashVisible"),
-		bannerAdd = document.querySelector("#fav-show-add"), bannerRem = document.querySelector("#fav-show-remove"),
-		bannerDel = document.querySelector("#flashdelete");
+		contadorFavs = document.getElementById("div-favorites"), contador = document.querySelector(".contador-fav"),
+		contenedor = document.getElementById("flashVisible"), bannerAdd = document.getElementById("fav-show-add"),
+		bannerRem = document.getElementById("fav-show-remove"), bannerDel = document.getElementById("flashdelete");
 	
 	let alldelete = false;
 	let avisoId = 0;
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 	
 	const muestraFlash = (pasado) => {
-		//pasado.classList.add('-translate-x-[200%]');
 		pasado.querySelector('.flashBarra').classList.add('animateBarra');
 		setTimeout(function () {
 			quitaFlash(pasado);
@@ -80,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				.then(response => response.json())
 				.then(data => {
 					if (containsString(data.favorites, productId)) {
-						//	if (contador === null) location.reload()
 						contador.innerText = (+contador.innerText) + 1;
 						bannerAdd.querySelector('[data-role=info]').innerText = this.dataset.nameproduct;
 						crearNuevo(bannerAdd);
